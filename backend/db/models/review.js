@@ -12,23 +12,41 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Review.belongsTo(models.Spot,{foreignKey:"spotId"})
       Review.belongsTo(models.User,{foreignKey:"userId"})
-      Review.hasMany(models.reviewImage,{
-        foreignKey:'reviewId',
-        onDelete:"CASCADE",
-        hooks:true
-      })
-
-
+      Review.hasMany(models.reviewImage,{foreignKey:'reviewId',onDelete:"CASCADE",hooks:true})
     }
   }
   Review.init({
-    spotId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER,
-    review: DataTypes.STRING,
-    stars: DataTypes.INTEGER
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    spotId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    review: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    stars: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        min: 1,
+        max: 5
+      }
+    }
   }, {
     sequelize,
     modelName: 'Review',
+    defaultScope:{
+      attributes: { exclude: []}
+    }
   });
   return Review;
 };
