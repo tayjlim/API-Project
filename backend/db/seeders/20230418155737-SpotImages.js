@@ -37,9 +37,6 @@ module.exports = {
         spotId:6,
         url: 'https://a0.muscache.com/im/pictures/d2b95cc9-dbed-45f8-9349-c6da0d6633b2.jpg?im_w=480',
         preview: true
-      },
-      {
-
       }
 
     ])
