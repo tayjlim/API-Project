@@ -23,20 +23,19 @@ module.exports = {
       name: '6ixN9ne',
       description: 'Fake gangsters crib in California',
       price: 69.69
+    },
+    {
+      ownerId: 2, //2
+      address: '123 Main St',
+      city: 'Los Angeles',
+      state: 'California',
+      country: 'United States',
+      lat: 34.05,
+      lng: -118.24,
+      name: 'The Hollywood House',
+      description: 'Luxurious mansion in the heart of Hollywood',
+      price: 1000.00
     }
-    // },
-    // {
-    //   ownerId: 2, //2
-    //   address: '123 Main St',
-    //   city: 'Los Angeles',
-    //   state: 'California',
-    //   country: 'United States',
-    //   lat: 34.05,
-    //   lng: -118.24,
-    //   name: 'The Hollywood House',
-    //   description: 'Luxurious mansion in the heart of Hollywood',
-    //   price: 10000.00
-    // },
     // {
     //   ownerId: 3, //3
     //   address: '456 Park Ave',
