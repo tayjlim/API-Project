@@ -55,7 +55,7 @@ const validateSpot = [
 // get all spots
 router.get("/", async (req,res) =>{
     // all spots in arr
-    const spots = await Spot.findAll({raw: true})
+    const spots = await Spot.findAll({raw:true})
     for(let spot of spots){ // iterate through all spots
          // gets the total stars and average
         const stars = await Review.sum('stars',{where:{spotId:spot.id}}); // get all stars tied to this spot
