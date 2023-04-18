@@ -5,11 +5,39 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
+      User.hasMany(models.Spot,{
+        foreignKey: 'ownerId',
+        onDelete: 'CASCADE',
+        hooks: true
+      });
+      User.hasMany(models.Booking,{
+        foreignKey:'userId',
+        onDelete: 'CASCADE',
+        hooks: true
+      });
+      User.hasMany(models.Review,{
+        foreignKey:'userId',
+        onDelete: 'CASCADE',
+        hooks: true
+      });
     }
   };
 
   User.init(
     {
+      id:{
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      lastName:{
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,12 +49,6 @@ module.exports = (sequelize, DataTypes) => {
             }
           }
         }
-      },
-      firstName:{
-        type: DataTypes.STRING,
-      },
-      lastName:{
-        type: DataTypes.STRING,
       },
       email: {
         type: DataTypes.STRING,
@@ -43,12 +65,24 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60]
         }
       }
-    }, {
+    },
+    {
       sequelize,
-      modelName: 'User',
+      modelName: "User",
       defaultScope: {
         attributes: {
           exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+        }
+      },
+      scopes: {
+        currentUser: {
+          attributes: { exclude: ["hashedPassword", "createdAt", "updatedAt"] }
+        },
+        loginUser: {
+          attributes: {exclude:["createdAt", "updatedAt"]}
+        },
+        public: {
+          attributes:{exclude: ["hashedPassword", "createdAt", "updatedAt", "username", "email"]}
         }
       }
     }
