@@ -11,33 +11,33 @@ module.exports = {
     await queryInterface.bulkInsert(options,[
       {
         spotId: 1,
-        userId: 4,
+        userId: 1,
         review: 'Ghetto',
         stars: 3,
-      },
-      {
-        spotId: 2,
-        userId: 1,
-        review: 'sauce it up bluhd',
-        stars: 4,
-      },
-      {
-        spotId: 3,
-        userId: 2,
-        review: 'swaggg',
-        stars: 5,
-      },
-      {
-        spotId: 4,
-        userId: 3,
-        review: 'weoweo',
-        stars: 2,
       }
-    ],{})
+      // {
+      //   spotId: 2,
+      //   userId: 1,
+      //   review: 'sauce it up bluhd',
+      //   stars: 4,
+      // },
+      // {
+      //   spotId: 3,
+      //   userId: 2,
+      //   review: 'swaggg',
+      //   stars: 5,
+      // },
+      // {
+      //   spotId: 4,
+      //   userId: 3,
+      //   review: 'weoweo',
+      //   stars: 2,
+      // }
+    ])
   },
 
   async down (queryInterface, Sequelize) {
     options.tableName = 'Reviews'
-    return queryInterface.bulkDelete(options,null)
+    await queryInterface.bulkDelete(options)
   }
 };

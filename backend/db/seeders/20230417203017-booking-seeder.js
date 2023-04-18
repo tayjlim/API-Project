@@ -17,19 +17,19 @@ module.exports = {
         userId: 2,
         startDate: new Date('2023-08-01'),
         endDate: new Date('2023-10-10')
-         },
-      {
-        spotId: 3,
-        userId: 1,
-        startDate: new Date('2023-9-10'),
-        endDate: new Date('2023-11-12')
-      },
-      {
-        spotId: 2,
-        userId: 1,
-        startDate: new Date('2023-10-03'),
-        endDate: new Date('2023-12-12')
-      }
+         }
+      // {
+      //   spotId: 3,
+      //   userId: 1,
+      //   startDate: new Date('2023-9-10'),
+      //   endDate: new Date('2023-11-12')
+      // },
+      // {
+      //   spotId: 2,
+      //   userId: 1,
+      //   startDate: new Date('2023-10-03'),
+      //   endDate: new Date('2023-12-12')
+      // }
    ],{})
   },
 

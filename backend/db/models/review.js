@@ -1,52 +1,47 @@
+
 'use strict';
 const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Review extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+
     static associate(models) {
-      Review.belongsTo(models.Spot,{foreignKey:"spotId"})
-      Review.belongsTo(models.User,{foreignKey:"userId"})
-      Review.hasMany(models.reviewImage,{foreignKey:'reviewId',onDelete:"CASCADE",hooks:true})
+      Review.belongsTo(models.User, {foreignKey: 'userId'});
+      Review.belongsTo(models.Spot, {foreignKey: 'spotId'});
+      Review.hasMany(models.ReviewImage, {foreignKey: 'reviewId', onDelete: 'CASCADE',  hooks: true})
     }
   }
   Review.init({
     id: {
-      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
-      autoIncrement: true
-    },
-    spotId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      type: DataTypes.INTEGER
     },
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      references: {
+        model: 'Users'
+      },
+      onDelete: 'CASCADE'
+    },
+    spotId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Spots'
+      },
+      onDelete: 'CASCADE'
     },
     review: {
-      type: DataTypes.STRING,
-      allowNull: false
+      type: DataTypes.TEXT
     },
     stars: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        min: 1,
-        max: 5
-      }
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,
     modelName: 'Review',
-    defaultScope:{
-      attributes: { exclude: []}
-    }
   });
   return Review;
 };
