@@ -34,23 +34,21 @@ module.exports = {
       },
       country: {
         type: Sequelize.STRING,
-        allowNull: true
       },
       lat: {
         type: Sequelize.DECIMAL,
-        allowNull: true
+
       },
       lng: {
         type: Sequelize.DECIMAL,
-        allowNull: false
+
       },
       name: {
         type: Sequelize.STRING,
         allowNull: false
       },
       description: {
-        type: Sequelize.TEXT,
-        allowNull: false
+        type: Sequelize.TEXT
       },
       price: {
         type: Sequelize.DECIMAL,
