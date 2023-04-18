@@ -72,11 +72,12 @@ router.get("/", async (req,res) =>{
 //creating a new spot
 
 router.post('/',[validateSpot,requireAuth],async(req,res) =>{
-const {user} = req
-if(user){
-const {address,city,state,country,lat,lng,name,description,price} = req.body
-const newSpot = await Spot.create({address,city,state,country,lat,lng,name,description,price})
-res.status(201).json(newSpot);
+  const {user} = req
+  //is there a user in the request?
+  if(user){
+  const {address,city,state,country,lat,lng,name,description,price} = req.body
+  const newSpot = await Spot.create({address,city,state,country,lat,lng,name,description,price})
+  res.status(201).json(newSpot);
 }
 
 })
