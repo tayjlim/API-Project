@@ -73,7 +73,7 @@ module.exports = {
       price: 5000.00
     },
     {
-      ownerId: 4, //6
+      ownerId: 3, //6
       address: 'Bulbasaur Boulevard 3',
       city: 'Saffron City',
       state: 'Kanto',

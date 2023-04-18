@@ -9,6 +9,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
 options.tableName = 'ReviewImages';
 return queryInterface.bulkInsert(options,[
+  
   {
     reviewId: 1,
     url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53218977/original/d56d5868-07c0-441e-b491-ba660ad36cc8.jpeg?im_w=720'
