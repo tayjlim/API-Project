@@ -1,7 +1,7 @@
 const express = require("express");
 const { Spot, SpotImage, Review, User, ReviewImage, Booking } = require("../../db/models");
 const { handleValidationErrors } = require("../../utils/validation");
-const { requireAuth } = require("../../utils/auth");
+const { requireAuth, restoreUser } = require("../../utils/auth");
 const { check } = require("express-validator");
 const router = express.Router();
 
@@ -105,9 +105,22 @@ const {user} = req;
             preview
           })
         }
-  return res.status(404).json({message:"not correct Owner ID"})
-})
+  return res.status(404).json({message: "not correct Owner ID"})
+});
 
+// update spot
+router.put('/:spotId',[requireAuth,validateSpot], async (req,res)=>{
+  let spot = await Spot.findByPk(req.params.spotId)
+  const {user} = req;
+  if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
+  if(spot.ownerId === user.id){
+    const {address, city, state, country, lat, lng, name, description,price} = req.body
+   await spot.update({address,city,state,country,lat,lng,name,description,price,});
+    return res.status(200).json(await Spot.findByPk(req.params.spotId))
+  }
+  // catch user if not tied to ownerId of SPOT!
+  return res.status(403).json({"message": "Forbidden"})
+})
 
 //creating a new spot
 router.post('/',[validateSpot,requireAuth],async(req,res) =>{
