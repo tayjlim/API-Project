@@ -10,49 +10,47 @@ const validateSpot = [
   check("address")
     .exists({ checkFalsy: true })
     .withMessage("Street address is required"),
-
   check("city")
   .exists({ checkFalsy: true })
   .withMessage("City is required"),
-
   check("state")
   .exists({ checkFalsy: true })
   .withMessage("State is required"),
-
   check("country")
     .exists({ checkFalsy: true })
     .withMessage("Country is required"),
-
   check("lat")
     .isFloat({ min: -90, max: 90 })
     .withMessage("Latitude is not valid"),
-
   check("lng")
     .isFloat({ min: -180, max: 180 })
     .withMessage("Longitude is not valid"),
-
   check("name")
   .exists({ checkFalsy: true })
   .withMessage("Name is required"),
-
   check("name")
     .isLength({ max: 49 })
     .withMessage("Name must be less than 50 characters"),
-
   check("description")
     .exists({ checkFalsy: true })
     .withMessage("Description is required"),
-
   check("price")
     .exists({ checkFalsy: true })
     .withMessage("Price per day is required"),
-
   handleValidationErrors
 ];
 
 // get details of a spot by ID
 router.get('/:spotId', async(req,res)=>{
-  
+  const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
+  if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
+  spot.numReviews = await Review.count({where:{spotId:spot.id}});
+  spot.avgStarRating = await Review.sum('stars',{where:{spotId:spot.id}})/spot.numReviews
+  spot.SpotImages = await SpotImage;
+  spot.Owner = await User.findOne({where:{id:spot.ownerId},
+    attributes:['id','firstName','lastName']
+  })
+ return res.json({spot})
 })
 
 
