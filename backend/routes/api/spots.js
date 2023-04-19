@@ -99,42 +99,31 @@ router.post('/:spotId/reviews',[requireAuth,validateReview], async(req,res)=>{
 
   const {user} = req
   //does spot exist?
-  if(!spot)return res.status(404).json({message: "Spot couldn't be found"}); // throw error
+  if(!spot)
+  return res.status(404).json({message: "Spot couldn't be found"}); // throw error
 
   if(await Review.findOne({where:{spotId:req.params.spotId, userId:user.id}}))//does review exist?
-
   return res.status(500).json({message:"User already has a review for this spot"})// throw error
 
   //valid things go down here
   if(user){
     console.log('reach here')
-    const {review, stars} = req.body; // get info from body
-    const newReview = await Review.create({userId: user.id, spotId: req.params.spotId,review,stars,})
+    const newReview = await Review.create({userId: user.id, spotId: req.params.spotId,...req.body})
     return res.status(201).json(newReview)// send response!
   }
 })
 
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
-const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
-if(!spot)return res.status(404).json({message:"Spot does not exist"});
+  const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
+  if(!spot)return res.status(404).json({message:"Spot does not exist"});
 
-const {user} = req;
+  const {user} = req;
         if(user.id === spot.ownerId){
-          const {url,preview} = req.body
-          const newSpotImage = await SpotImage.create({
-            spotId:req.params.spotId,
-            url,
-            preview
-          })
-
-          return res.status(201).json({
-            id: newSpotImage.id,
-            url,
-            preview
-          })
-        }
-  return res.status(404).json({message: "not correct Owner ID"})
+          const newSpotImage = await SpotImage.create({spotId:req.params.spotId,...req.body})
+          return res.status(201).json({id: newSpotImage.id,...req.body})
+          }
+    return res.status(404).json({message: "not correct Owner ID"})
 });
 
 // update spot
@@ -143,8 +132,7 @@ router.put('/:spotId',[requireAuth,validateSpot], async (req,res)=>{
   const {user} = req;
   if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
   if(spot.ownerId === user.id){
-    const {address, city, state, country, lat, lng, name, description,price} = req.body
-   await spot.update({address,city,state,country,lat,lng,name,description,price,});
+   await spot.update({...req.body});
     return res.status(200).json(await Spot.findByPk(req.params.spotId))
   }
   // catch user if not tied to ownerId of SPOT!
@@ -156,8 +144,7 @@ router.post('/',[validateSpot,requireAuth],async(req,res) =>{
   const {user} = req
   //is there a user in the request?
   if(user){
-  const {address,city,state,country,lat,lng,name,description,price} = req.body
-  const newSpot = await Spot.create({ownerId:user.id,address,city,state,country,lat,lng,name,description,price})
+  const newSpot = await Spot.create({ownerId:user.id,...req.body})
   return res.status(201).json(newSpot);
   }
 })
