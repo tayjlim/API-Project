@@ -67,6 +67,22 @@ router.get("/", async (req,res) =>{
     return res.status(200).json(spots);
 })
 
+
+//////work on this next this is getting reviews by spot ID
+router.get('/:spotId/reviews',async (req,res)=>{
+const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
+if(!spot)return res.status(404).json({message:"Spot does not exist"});
+
+const reviews = await Review.findAll({where: {spotId: req.params.spotId}});
+
+let allReviews = [];
+reviews.forEach(review => {
+  allReviews.push()
+});
+res.status(200).json({['Reviews']: reviews});
+
+});
+
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
 const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
