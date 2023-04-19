@@ -5,7 +5,6 @@ const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 
 const router = express.Router();
-
 const validateSpot = [
   check("address")
     .exists({ checkFalsy: true })
@@ -51,7 +50,6 @@ const validateSpot = [
 ];
 
 
-
 // get all spots
 router.get("/", async (req,res) =>{
     // all spots in arr
@@ -69,14 +67,36 @@ router.get("/", async (req,res) =>{
     res.status(200).json(spots);
 })
 
-//creating a new spot
+//Create an Image for Spot ID
+router.post("/:spotId/images", requireAuth, async (req, res) => {
+const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
+if(!spot)return res.status(404).json({message:"Spot does not exist"});
 
+  // console.log('req . user ',req.user.id);
+  // console.log(spot)
+
+        const {user} = req;
+        if(user.id === spot.ownerId){
+          const {url,preview} = req.body
+          const newSpotImage = await SpotImage.create({
+            url,
+            preview
+          })
+          console.log(newSpotImage)
+          res.status(201).res.json({newSpotImage})
+        }
+
+  res.status(404).json({message:"not correct Owner ID"})
+})
+
+
+//creating a new spot
 router.post('/',[validateSpot,requireAuth],async(req,res) =>{
   const {user} = req
   //is there a user in the request?
   if(user){
   const {address,city,state,country,lat,lng,name,description,price} = req.body
-  const newSpot = await Spot.create({address,city,state,country,lat,lng,name,description,price})
+  const newSpot = await Spot.create({ownerId:user.id,address,city,state,country,lat,lng,name,description,price})
   res.status(201).json(newSpot);
 }
 
