@@ -5,6 +5,7 @@ const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
 
 const router = express.Router();
+
 const validateSpot = [
   check("address")
     .exists({ checkFalsy: true })
@@ -62,34 +63,47 @@ router.get("/", async (req,res) =>{
         // check to see if previewimage is true if true put the url there
         const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
         if(previewImage) spot.previewImage = previewImage.url
-        else spot.previewImage = 'invalid';
+        else spot.previewImage = 'NO IMAGE URL';
     }
-    return res.status(200).json(spots);
+    return res.status(200).json({Spots:spots});
 })
 
 
 //////work on this next this is getting reviews by spot ID
-router.get('/:spotId/reviews',async (req,res)=>{
-const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
-if(!spot)return res.status(404).json({message:"Spot does not exist"});
+// router.get('/:spotId/reviews',async (req,res)=>{
+//   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
+//   if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
 
-const reviews = await Review.findAll({where: {spotId: req.params.spotId}});
+//   const reviews = await Review.findAll({where: {spotId: req.params.spotId}});
 
-let allReviews = [];
-reviews.forEach(review => {
-  allReviews.push()
-});
-res.status(200).json({['Reviews']: reviews});
+//   let allReviews = [];
+//   reviews.forEach(review => {
+//     allReviews.push()
+//   });
+//   res.status(200).json({['Reviews']: reviews});
+// });
 
-});
+  router.get('/current',[requireAuth], async(req,res)=>{
+    const {user} = req;
+    const spots = await Spot.findAll({raw:true,where:{ownerId:user.id}})
+    
+    for(let spot of spots){
+      //find average
+      const reviewCount = await Review.count({where:{spotId:spot.id}});
+      const score = await Review.sum('stars',{where:{spotId:spot.id}});
+      spot.avgRating = score/reviewCount; // set average
+      //find a previewImage
+      const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
+      if(previewImage) spot.previewImage = `${previewImage.url}`
+      else spot.previewImage = 'NO IMAGE URL';
+    }
+    return res.status(200).json({Spots:spots})
+  })
 
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
 const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
 if(!spot)return res.status(404).json({message:"Spot does not exist"});
-
-// console.log('req . user ',req.user.id);
-// console.log(spot)
 
 const {user} = req;
         if(user.id === spot.ownerId){
@@ -120,8 +134,6 @@ router.post('/',[validateSpot,requireAuth],async(req,res) =>{
   return res.status(201).json(newSpot);
   }
 })
-
-
 
 
 module.exports = router;
