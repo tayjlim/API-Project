@@ -3,7 +3,6 @@ const { Spot, SpotImage, Review, User, ReviewImage, Booking } = require("../../d
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { check } = require("express-validator");
-
 const router = express.Router();
 
 const validateSpot = [
@@ -40,6 +39,22 @@ const validateSpot = [
   handleValidationErrors
 ];
 
+router.get('/current',[requireAuth], async(req,res)=>{
+  const {user} = req;
+  const spots = await Spot.findAll({raw:true,where:{ownerId:user.id}})
+
+  for(let spot of spots){
+    //find average
+    const reviewCount = await Review.count({where:{spotId:spot.id}});
+    const score = await Review.sum('stars',{where:{spotId:spot.id}});
+    spot.avgRating = score/reviewCount; // set average
+    //find a previewImage
+    const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
+    if(previewImage) spot.previewImage = `${previewImage.url}`
+    else spot.previewImage = 'NO IMAGE URL';
+  }
+  return res.status(200).json({Spots:spots})
+})
 // get details of a spot by ID
 router.get('/:spotId', async(req,res)=>{
   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
@@ -68,22 +83,7 @@ router.get('/:spotId', async(req,res)=>{
 //   res.status(200).json({['Reviews']: reviews});
 // });
 
-  router.get('/current',[requireAuth], async(req,res)=>{
-    const {user} = req;
-    const spots = await Spot.findAll({raw:true,where:{ownerId:user.id}})
 
-    for(let spot of spots){
-      //find average
-      const reviewCount = await Review.count({where:{spotId:spot.id}});
-      const score = await Review.sum('stars',{where:{spotId:spot.id}});
-      spot.avgRating = score/reviewCount; // set average
-      //find a previewImage
-      const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
-      if(previewImage) spot.previewImage = `${previewImage.url}`
-      else spot.previewImage = 'NO IMAGE URL';
-    }
-    return res.status(200).json({Spots:spots})
-  })
 
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
