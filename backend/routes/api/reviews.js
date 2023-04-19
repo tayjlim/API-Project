@@ -3,9 +3,34 @@ const { restoreUser, requireAuth, isAuthorized } = require("../../utils/auth");
 const { ReviewImage, Review, User, Spot } = require("../../db/models");
 const router = express.Router();
 
-const validateReviewImage =[
+router.get("/current",[restoreUser,requireAuth],async (req,res)=>{
 
-]
+    const{user} = req
+    let reviews = await Review.findAll({
+        raw:true,
+        attributes: ["id", "spotId", "userId", "review", "stars", "createdAt", "updatedAt"],
+        include: [
+            User,
+            {
+                model: Spot,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            },
+            {
+                model: ReviewImage,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            }],
+        where: {
+            userId: user.id
+        }
+    });
+res.json(reviews)
+
+
+})
 
 router.post('/:reviewId/images',[restoreUser,requireAuth], async(req,res)=>{
     const review = await Review.findOne({where:{id: req.params.reviewId}}) // find the review
