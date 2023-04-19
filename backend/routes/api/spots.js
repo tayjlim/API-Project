@@ -5,6 +5,17 @@ const { requireAuth, restoreUser } = require("../../utils/auth");
 const { check } = require("express-validator");
 const router = express.Router();
 
+const validateReview =[
+  check('review')
+  .exists({checkFalsy:true})
+  .withMessage("Review text is required"),
+  check('stars')
+    .exists({checkFalsy:true})
+    .isFloat({min:1,max:5})
+    .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+  ];
+
 const validateSpot = [
   check("address")
     .exists({ checkFalsy: true })
@@ -42,7 +53,6 @@ const validateSpot = [
 router.get('/current',[requireAuth], async(req,res)=>{
   const {user} = req;
   const spots = await Spot.findAll({raw:true,where:{ownerId:user.id}})
-
   for(let spot of spots){
     //find average
     const reviewCount = await Review.count({where:{spotId:spot.id}});
@@ -55,6 +65,7 @@ router.get('/current',[requireAuth], async(req,res)=>{
   }
   return res.status(200).json({Spots:spots})
 })
+
 // get details of a spot by ID
 router.get('/:spotId', async(req,res)=>{
   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
@@ -83,7 +94,25 @@ router.get('/:spotId', async(req,res)=>{
 //   res.status(200).json({['Reviews']: reviews});
 // });
 
+router.post('/:spotId/reviews',[requireAuth,validateReview], async(req,res)=>{
+  const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}});
 
+  const {user} = req
+  //does spot exist?
+  if(!spot)return res.status(404).json({message: "Spot couldn't be found"}); // throw error
+
+  if(await Review.findOne({where:{spotId:req.params.spotId, userId:user.id}}))//does review exist?
+
+  return res.status(500).json({message:"User already has a review for this spot"})// throw error
+
+  //valid things go down here
+  if(user){
+    console.log('reach here')
+    const {review, stars} = req.body; // get info from body
+    const newReview = await Review.create({userId: user.id, spotId: req.params.spotId,review,stars,})
+    return res.status(201).json(newReview)// send response!
+  }
+})
 
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
