@@ -50,22 +50,9 @@ const validateSpot = [
   handleValidationErrors
 ];
 
-
-// get all spots
-router.get("/", async (req,res) =>{
-    // all spots in arr
-    const spots = await Spot.findAll({raw:true})
-    for(let spot of spots){ // iterate through all spots
-         // gets the total stars and average
-        const stars = await Review.sum('stars',{where:{spotId:spot.id}}); // get all stars tied to this spot
-        const totalReviews = await Review.count({where:{spotId:spot.id}});
-        spot.avgRating = stars/totalReviews; // set it!
-        // check to see if previewimage is true if true put the url there
-        const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
-        if(previewImage) spot.previewImage = previewImage.url
-        else spot.previewImage = 'NO IMAGE URL';
-    }
-    return res.status(200).json({Spots:spots});
+// get details of a spot by ID
+router.get('/:spotId', async(req,res)=>{
+  
 })
 
 
@@ -86,7 +73,7 @@ router.get("/", async (req,res) =>{
   router.get('/current',[requireAuth], async(req,res)=>{
     const {user} = req;
     const spots = await Spot.findAll({raw:true,where:{ownerId:user.id}})
-    
+
     for(let spot of spots){
       //find average
       const reviewCount = await Review.count({where:{spotId:spot.id}});
@@ -133,6 +120,23 @@ router.post('/',[validateSpot,requireAuth],async(req,res) =>{
   const newSpot = await Spot.create({ownerId:user.id,address,city,state,country,lat,lng,name,description,price})
   return res.status(201).json(newSpot);
   }
+})
+
+// get all spots
+router.get("/", async (req,res) =>{
+  // all spots in arr
+  const spots = await Spot.findAll({raw:true})
+  for(let spot of spots){ // iterate through all spots
+       // gets the total stars and average
+      const stars = await Review.sum('stars',{where:{spotId:spot.id}}); // get all stars tied to this spot
+      const totalReviews = await Review.count({where:{spotId:spot.id}});
+      spot.avgRating = stars/totalReviews; // set it!
+      // check to see if previewimage is true if true put the url there
+      const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
+      if(previewImage) spot.previewImage = previewImage.url
+      else spot.previewImage = 'NO IMAGE URL';
+  }
+  return res.status(200).json({Spots:spots});
 })
 
 
