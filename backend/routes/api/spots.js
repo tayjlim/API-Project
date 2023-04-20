@@ -68,15 +68,33 @@ router.get('/current',[requireAuth], async(req,res)=>{
 
 // get details of a spot by ID
 router.get('/:spotId', async(req,res)=>{
+
   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
   if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
   spot.numReviews = await Review.count({where:{spotId:spot.id}});
-  spot.avgStarRating = await Review.sum('stars',{where:{spotId:spot.id}})/spot.numReviews
-  spot.SpotImages = await SpotImage;
-  spot.Owner = await User.findOne({where:{id:spot.ownerId},
+
+  spot.avgStarRating = await Review.sum('stars',{where:{spotId:spot.id}})/spot.numReviews;
+
+  spot.SpotImages = await SpotImage.findAll({
+    where:{spotId:spot.id},
+    attributes:['id','url','preview']
+  });
+
+  spot.Owner = await User.findOne({
+    where:{id:spot.ownerId},
     attributes:['id','firstName','lastName']
   })
  return res.json({spot})
+})
+
+//creating a new spot
+router.post('/',[validateSpot,requireAuth],async(req,res) =>{
+  const {user} = req
+  //is there a user in the request?
+  if(user){
+  const newSpot = await Spot.create({ownerId:user.id,...req.body})
+  return res.status(201).json(newSpot);
+  }
 })
 
 
@@ -116,7 +134,7 @@ router.post('/:spotId/reviews',[requireAuth,validateReview], async(req,res)=>{
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
-  if(!spot)return res.status(404).json({message:"Spot does not exist"});
+  if(!spot)return res.status(404).json({message: "Spot couldn't be found"});
 
   const {user} = req;
         if(user.id === spot.ownerId){
@@ -137,17 +155,23 @@ router.put('/:spotId',[requireAuth,validateSpot], async (req,res)=>{
   }
   // catch user if not tied to ownerId of SPOT!
   return res.status(403).json({"message": "Forbidden"})
+});
+
+router.delete('/:spotId',[requireAuth], async (req,res)=>{
+
+  const {user} = req;
+
+  const spot = await Spot.findByPk(req.params.spotId)
+  if(!spot) return res.status(404).json({message:"Spot Couldn't be found"});
+
+  if(spot.ownerId === user.id){
+    await spot.destroy();
+    return res.status(200).json({message:"Successfully deleted"})
+  }
+
+  return res.status(404).json({message:"forbidden"})
 })
 
-//creating a new spot
-router.post('/',[validateSpot,requireAuth],async(req,res) =>{
-  const {user} = req
-  //is there a user in the request?
-  if(user){
-  const newSpot = await Spot.create({ownerId:user.id,...req.body})
-  return res.status(201).json(newSpot);
-  }
-})
 
 // get all spots
 router.get("/", async (req,res) =>{
