@@ -98,19 +98,27 @@ router.post('/',[validateSpot,requireAuth],async(req,res) =>{
 })
 
 
-//////work on this next this is getting reviews by spot ID
-// router.get('/:spotId/reviews',async (req,res)=>{
-//   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
-//   if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
+//get reviews by spotID
+router.get('/:spotId/reviews',async (req,res)=>{
+  const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}})
+  if(!spot)return res.status(404).json({message:"Spot couldn't be found"});
 
-//   const reviews = await Review.findAll({where: {spotId: req.params.spotId}});
+  const reviews = await Review.findAll({
+    where: {spotId: req.params.spotId},
+    include:[
+      {
+        model: User,
+        attributes:['id','firstName','lastName']
+      },
+      {
+        model: ReviewImage,
+        attributes:['id','url']
+      }
+    ]
+  });
+  res.status(200).json({reviews})
 
-//   let allReviews = [];
-//   reviews.forEach(review => {
-//     allReviews.push()
-//   });
-//   res.status(200).json({['Reviews']: reviews});
-// });
+});
 
 router.post('/:spotId/reviews',[requireAuth,validateReview], async(req,res)=>{
   const spot = await Spot.findOne({raw:true,where:{id:req.params.spotId}});
