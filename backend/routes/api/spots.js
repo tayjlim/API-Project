@@ -273,9 +273,7 @@ router.get("/", async (req,res) =>{
   if(!page) page = 1;
   if(!size) size = 20;
 
-  let pagination = {};
-  pagination.limit = size;
-  pagination.offset = size * (page - 1);
+
 
   const where = {};
   let error= {};
@@ -326,6 +324,14 @@ where.lat = {[Op.lte]: maxLat}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///*
+
+let pagination = {};
+pagination.limit = size;
+pagination.offset = size * (page - 1);
+
+ if(Object.keys(error).length>0)
+ return res.status(400).json({message:"Bad Request",errors:error})
+
 
   const spots = await Spot.findAll({raw:true,where,...pagination})
   for(let spot of spots){ // iterate through all spots
