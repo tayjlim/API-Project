@@ -289,14 +289,14 @@ router.get("/", async (req,res) =>{
   maxPrice = parseFloat(maxPrice);//
 
 // errors
-if(page < 1 ) error.page = "Page must be greater than or equal to 1";
+if(page < 1 || isNaN(page)) error.page = "Page must be greater than or equal to 1";
 if(size < 1 || isNaN(size)) error.size = "Size must be greater than or equal to 1";
-if(maxLat >90 || maxLat <-90) error.maxLat ='Maximum latitude is invalid';
-if(maxLng >180 || maxLng<-180) error.maxLng = 'Maximum longitude is invalid';
-if(maxPrice < 0) error.maxPrice = 'Maximum price must be greater than or equal to 0';
-if(minPrice < 0) error.minPrice = 'Minimum price must be greater than or equal to 0';
-if(minLat >90 || minLat <-90) error.minLat = 'Minimum latitude is invalid';
-if(minLng > 180 || minLng <-180) error.minLng = 'Minimum longitude is invalid';
+if(maxLat >90 || maxLat <-90 || isNaN(maxLat)) error.maxLat ='Maximum latitude is invalid';
+if(maxLng >180 || maxLng<-180 || isNaN(maxLng)) error.maxLng = 'Maximum longitude is invalid';
+if(maxPrice < 0 || isNaN(maxPrice)) error.maxPrice = 'Maximum price must be greater than or equal to 0';
+if(minPrice < 0 || isNaN(minPrice)) error.minPrice = 'Minimum price must be greater than or equal to 0';
+if(minLat >90 || minLat <-90 || isNaN(minLat)) error.minLat = 'Minimum latitude is invalid';
+if(minLng > 180 || minLng <-180 || isNaN(minLng)) error.minLng = 'Minimum longitude is invalid';
 
 //
  if(minPrice)
@@ -316,16 +316,16 @@ if(minLat)
 where.lat = {[Op.gte]: minLat}
 if(maxLat)
 where.lat = {[Op.lte]: maxLat}
- /*
-///
-///
-///
-///
-///
-///
-///
 
- */
+
+//*//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///*
 
   const spots = await Spot.findAll({raw:true,where,...pagination})
   for(let spot of spots){ // iterate through all spots
