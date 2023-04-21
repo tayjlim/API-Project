@@ -67,6 +67,7 @@ const validateSpot = [
   handleValidationErrors
 ];
 
+
 router.get('/:spotId/bookings',[requireAuth],async (req,res)=>{
   const spot = await Spot.findByPk(req.params.spotId);
   if(!spot) return res.status(404).json({message:"Spot couldn't be found"})
@@ -267,7 +268,66 @@ router.delete('/:spotId',[requireAuth], async (req,res)=>{
 // get all spots
 router.get("/", async (req,res) =>{
   // all spots in arr
-  const spots = await Spot.findAll({raw:true})
+  let{page, size, minLat,minLng,maxLat,maxLng,minPrice,maxPrice} = req.query;
+
+  if(!page) page = 1;
+  if(!size) size = 20;
+
+  let pagination = {};
+  pagination.limit = size;
+  pagination.offset = size * (page - 1);
+
+  const where = {};
+  let error= {};
+  page = parseInt(page);//
+  size = parseInt(size);//
+  minLat = parseFloat(minLat);//
+  minLng = parseFloat(minlng);
+  maxLat = parseFloat(maxLat);//
+  maxLng = parseFloat(maxLng);//
+  minPrice = parseFloat(minPrice);//
+  maxPrice = parseFloat(maxPrice);//
+
+// errors
+if(page < 1 ) error.page = "Page must be greater than or equal to 1";
+if(size < 1 || isNaN(size)) error.size = "Size must be greater than or equal to 1";
+if(maxLat >90 || maxLat <-90) error.maxLat ='Maximum latitude is invalid';
+if(maxLng >180 || maxLng<-180) error.maxLng = 'Maximum longitude is invalid';
+if(maxPrice < 0) error.maxPrice = 'Maximum price must be greater than or equal to 0';
+if(minPrice < 0) error.minPrice = 'Minimum price must be greater than or equal to 0';
+if(minLat >90 || minLat <-90) error.minLat = 'Minimum latitude is invalid';
+if(minLng > 180 || minLng <-180) error.minLng = 'Minimum longitude is invalid';
+
+//
+ if(minPrice)
+  where.price = {[Op.gte]: minPrice}
+ if(maxPrice)
+  where.price = {[Op.lte]: maxPrice}
+
+//
+ if(minLng)
+  where.lng ={[Op.gte]: minLng}
+
+ if(maxLng)
+  where.lng = {[Op.lte]: maxLng}
+
+//lat
+if(minLat)
+where.lat = {[Op.gte]: minLat}
+if(maxLat)
+where.lat = {[Op.lte]: maxLat}
+ /*
+///
+///
+///
+///
+///
+///
+///
+
+ */
+
+  const spots = await Spot.findAll({raw:true,where,...pagination})
   for(let spot of spots){ // iterate through all spots
        // gets the total stars and average
       const stars = await Review.sum('stars',{where:{spotId:spot.id}}); // get all stars tied to this spot
