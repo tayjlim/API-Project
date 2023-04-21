@@ -6,8 +6,6 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { check } = require("express-validator");
 const { Op } = require('sequelize');
 
-
-
 const validateBooking = [
     check("endDate")
       .exists({checkFalsy:true})
@@ -20,11 +18,10 @@ const validateBooking = [
 
 const validateBookingEndDate = [
     check("endDate")
-      .custom((x, { req }) => new Date(req.body.startDate) < new Date(x))
+      .custom((x, {req}) => new Date(req.body.startDate) < new Date(x))
       .withMessage("endDate cannot be on or before startDate"),
     handleValidationErrors,
   ];
-
 
 router.get('/current',[requireAuth], async (req,res)=>{
     const {user} = req;
