@@ -17,7 +17,7 @@ const validateBooking = [
 ];
 const validateBookingEndDate = [
   check("endDate")
-    .custom((value, { req }) => new Date(req.body.startDate) < new Date(value))
+    .custom((x, { req }) => new Date(req.body.startDate) < new Date(x))
     .withMessage("endDate cannot be on or before startDate"),
   handleValidationErrors,
 ];
@@ -97,15 +97,10 @@ router.post('/:spotId/bookings',[requireAuth,validateBooking,validateBookingEndD
   const {user} = req;
   const spot = await Spot.findByPk(req.params.spotId);
   let e= {};
-
-
   //spot DNE?
   if(!spot) return res.status(404).json({message:"Spot couldn't be found"})
   //spot is owned by user?
   if(spot.ownerId === user.id)res.status(403).json({message:"Owners cannot Book their own spots"});
-  //checking the end date
-
-    if(req.body.startDate === req.body.endDate)return res.status(400).json({})
 
   //contradicting dates:
   const starts = await Booking.findAll({
@@ -135,7 +130,6 @@ router.post('/:spotId/bookings',[requireAuth,validateBooking,validateBookingEndD
         ...req.body
       })
       return res.status(200).json({newBooking})
-
 })
 
 router.get('/current',[requireAuth], async(req,res)=>{
@@ -226,6 +220,7 @@ router.post('/:spotId/reviews',[requireAuth,validateReview], async(req,res)=>{
     return res.status(201).json(newReview)// send response!
   }
 })
+
 
 //Create an Image for Spot ID
 router.post("/:spotId/images", requireAuth, async (req, res) => {
