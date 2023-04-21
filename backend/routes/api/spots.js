@@ -61,10 +61,10 @@ const validateSpot = [
 ];
 
 router.get('/:spotId/bookings',[requireAuth],async (req,res)=>{
-
   const spot = await Spot.findByPk(req.params.spotId);
   if(!spot) return res.status(404).json({message:"Spot couldn't be found"})
   let arr =[];
+  
   //case 1 if u are not owner do this
   const {user} = req;
   if(user.id != spot.ownerId){
@@ -74,18 +74,16 @@ router.get('/:spotId/bookings',[requireAuth],async (req,res)=>{
     })
     return res.status(200).json({Booking:bookings})
   }
-
-  //// WORK ON THIS PLZ
     const bookings = await Booking.findAll({
       where:{spotId:req.params.spotId},
-      includes:{model : User,attributes:['id','firstName','lastName']}})
+      include:{model : User,attributes:['id','firstName','lastName']}
+    })
     for(let i = 0; i<bookings.length;i++){
       let booking = bookings[i]
       booking.toJSON();
-      const newItem = {booking}
-      arr.push(newItem);
+      arr.push(booking);
     }
-    res.status(200).json({Booking:arr})
+    res.status(200).json({Bookings:arr})
 })
 
 router.post('/:spotId/bookings',[requireAuth,validateBooking],async (req,res)=>{
