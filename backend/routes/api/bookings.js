@@ -53,14 +53,16 @@ router.get('/current',[requireAuth], async (req,res)=>{
 
     //find the image of the spot with preview === true
     for(let booking of responseBooking){
+      if(booking.Spot.SpotImages.length===0) booking.Spot.previewImage = 'no preview'
      for(let image of booking.Spot.SpotImages){
       if(image.preview === true) booking.Spot.previewImage = image.url
       else booking.Spot.previewImage = 'no preview'
 
       if(!image.url) booking.Spot.previewImage ='no image';
       // delete key
-      delete booking.Spot.SpotImages
+
      }
+     delete booking.Spot.SpotImages
     }
 
     return res.status(200).json({Bookings:responseBooking})

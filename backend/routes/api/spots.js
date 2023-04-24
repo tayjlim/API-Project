@@ -370,9 +370,7 @@ pagination.offset = size * (page - 1);
 
 
   }
-  return res.status(200).json({Spots:spots,
-  page:page,
-size:size});
+  return res.status(200).json({Spots:spots,page:page,size:size});
 
 })
 
