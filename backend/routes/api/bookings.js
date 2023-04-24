@@ -25,23 +25,45 @@ const validateBookingEndDate = [
 
 router.get('/current',[requireAuth], async (req,res)=>{
     const {user} = req;
-    const booking =  await Booking.findAll({
+    const bookings =  await Booking.findAll({
         where:{
             userId:user.id
         },
+        attributes:['id','spotId','userId','startDate','endDate','createdAt','updatedAt'],
         include:{
             model:Spot,
             attributes:['id','ownerId','address','city','state','country','lat','lng','name','price'],
-                include:{
-                    model: SpotImage
-                }
+            include:{
+                model:SpotImage
+            }
         },
 
     })
 
-    if(booking.length ===0)return res.status(404).json({message: "Review couldn't be found"})
+    if(bookings.length ===0)return res.status(404).json({message: "Booking couldn't be found"})
 
-    return res.status(200).json(booking)
+    //previewImage property add:
+      // push contents into the array.
+      // for each booking add a preview image key
+
+    const responseBooking = [];
+    for(let booking of bookings){
+      responseBooking.push(booking.toJSON())
+    }
+
+    //find the image of the spot with preview === true
+    for(let booking of responseBooking){
+     for(let image of booking.Spot.SpotImages){
+      if(image.preview === true) booking.Spot.previewImage = image.url
+      else booking.Spot.previewImage = 'no preview'
+
+      if(!image.url) booking.Spot.previewImage ='no image';
+      // delete key
+      delete booking.Spot.SpotImages
+     }
+    }
+
+    return res.status(200).json({Bookings:responseBooking})
 })
 
 router.put('/:bookingId',[validateBooking,validateBookingEndDate,requireAuth],async (req,res)=>{

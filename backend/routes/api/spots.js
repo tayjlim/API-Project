@@ -346,7 +346,7 @@ where.lat = {[Op.lte]: maxLat}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///*
+///////////*
 
 let pagination = {};
 pagination.limit = size;
@@ -355,7 +355,6 @@ pagination.offset = size * (page - 1);
  if(Object.keys(error).length>0)
  return res.status(400).json({message:"Bad Request",errors:error})
 
-
   const spots = await Spot.findAll({raw:true,where,...pagination})
   for(let spot of spots){ // iterate through all spots
        // gets the total stars and average
@@ -363,11 +362,18 @@ pagination.offset = size * (page - 1);
       const totalReviews = await Review.count({where:{spotId:spot.id}});
       spot.avgRating = stars/totalReviews; // set it!
       // check to see if previewimage is true if true put the url there
+
       const previewImage = await SpotImage.findOne({where:{spotId:spot.id}})
       if(previewImage) spot.previewImage = previewImage.url
       else spot.previewImage = 'NO IMAGE URL';
+
+
+
   }
-  return res.status(200).json({Spots:spots});
+  return res.status(200).json({Spots:spots,
+  page:page,
+size:size});
+
 })
 
 
