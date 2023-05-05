@@ -52,7 +52,7 @@ function LoginFormPage() {
         <button type="submit">Log In</button>
       </form>
     </>
-  );
+  )
 }
 
 export default LoginFormPage;
