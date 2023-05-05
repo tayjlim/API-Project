@@ -106,6 +106,8 @@ const booking = await Booking.findByPk(req.params.bookingId)
 
 //delete this shit
 router.delete('/:bookingId',requireAuth, async(req,res)=>{
+
+  
   const {user} = req;
   const booking = await Booking.findByPk(req.params.bookingId)
   if(!booking)return res.status(404).json({message:"Booking couldn't be found"})
