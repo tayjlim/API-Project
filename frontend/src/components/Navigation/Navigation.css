@@ -2,8 +2,25 @@
     display: none;
 }
 
+#homebttn{
+align-items: center;
+justify-content: center;
+}
+
 #navigation{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    border: solid;
 }
+
+.fas{
+    margin-bottom: 20px;
+    justify-content: center;
+
+}
+
+ul {
+    list-style-type: none;
+    padding: 5px;
+  }
