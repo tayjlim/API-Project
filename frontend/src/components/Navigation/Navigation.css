@@ -3,6 +3,8 @@
 }
 
 #homebttn{
+
+border-radius: 2px;
 align-items: center;
 justify-content: center;
 }
@@ -11,7 +13,12 @@ justify-content: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: solid;
+    border-bottom: solid;
+}
+li{
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .fas{

@@ -13,52 +13,52 @@ module.exports = {
   options.tableName = 'Spots';
    return queryInterface.bulkInsert(options,[
     {
-      ownerId: 1, // 1
-      address: 'Snitch n9ne Street',
-      city: 'Ocean Side',
-      state: 'New York',
-      country: 'United States',
-      lat: 50.66,
-      lng: 45.99,
-      name: '6ixN9ne',
-      description: 'Fake gangsters crib in California',
-      price: 69.69
+      ownerId: 1,
+      address: 'Pallet Town',
+      city: 'Kanto',
+      state: 'Kanto',
+      country: 'Japan',
+      lat: 35.05,
+      lng: 135.78,
+      name: 'Professor Oak\'s Lab',
+      description: 'The research laboratory of the world-famous Pokémon expert, Professor Oak',
+      price: 100.00
     },
     {
-      ownerId: 2, //2
-      address: '123 Main St',
-      city: 'Los Angeles',
-      state: 'California',
-      country: 'United States',
-      lat: 34.05,
-      lng: -118.24,
-      name: 'The Hollywood House',
-      description: 'Luxurious mansion in the heart of Hollywood',
+      ownerId: 2,
+      address: '123 Victory Road',
+      city: 'Indigo Plateau',
+      state: 'Kanto',
+      country: 'Japan',
+      lat: 35.6,
+      lng: 139.6,
+      name: 'Elite Four HQ',
+      description: 'The headquarters of the Kanto Elite Four, where only the strongest trainers are allowed to challenge',
+      price: 500.00
+    },
+    {
+      ownerId: 3,
+      address: '456 Ecruteak City',
+      city: 'Johto',
+      state: 'Johto',
+      country: 'Japan',
+      lat: 36.41,
+      lng: 138.25,
+      name: 'Burned Tower View',
+      description: 'Luxury apartment with stunning views of the historic Burned Tower in Ecruteak City',
       price: 1000.00
     },
     {
-      ownerId: 3, //3
-      address: '456 Park Ave',
-      city: 'NYC',
-      state: 'New York',
-      country: 'United States',
-      lat: 40.76,
-      lng: 70.77,
-      name: 'Central Park View',
-      description: 'Luxury apartment with stunning views of Central Park',
-      price: 5000.00
-    },
-    {
-      ownerId: 2, //4
-      address: '789 Beach Blvd',
-      city: 'Miami',
-      state: 'Florida',
-      country: 'United States',
-      lat: 25.76,
-      lng: -80.13,
-      name: 'Oceanfront Villa',
-      description: 'Spacious villa with direct access to the beach',
-      price: 7500.00
+      ownerId: 2,
+      address: '789 Sootopolis City',
+      city: 'Hoenn',
+      state: 'Hoenn',
+      country: 'Japan',
+      lat: 33.93,
+      lng: 131.97,
+      name: 'Cave of Origin Retreat',
+      description: 'A spacious villa with direct access to the Cave of Origin in Sootopolis City',
+      price: 2000.00
     },
     {
       ownerId: 1, //5

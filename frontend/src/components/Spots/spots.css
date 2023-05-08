@@ -1,0 +1,23 @@
+.allContainer{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    font:bold;
+}
+
+.spotContainer{
+    margin: 10px;
+    display:flex;
+    flex-direction: column;
+}
+
+.spotImage{
+    width:  100;
+}
+
+p{
+    font:bold;
+}
+#root{
+    background-color: rgb(211, 210, 210);
+}
