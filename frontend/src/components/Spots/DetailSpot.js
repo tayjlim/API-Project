@@ -18,17 +18,20 @@ useEffect(()=>{
 return(
     <div className = ''>
         <div className ='topHeaders'>
-            <h1>{spot.name}</h1>
-            <h2>{spot.city}, {spot?.state}, {spot.country}</h2>
+            <h1>{spot?.name}</h1>
+            <h2>{spot?.city}, {spot?.state}, {spot?.country}</h2>
         </div>
 
         <div className ='imageBox'>
-            <img src = {spot?.previewImage}/>
-            Image Div
+            <img src = {spot?.SpotImages[0].url}/>
         </div>
 
-        <div className = 'host'></div>
-        <h3>Hosted by {spot.Owner.firstName} , {spot.Owner.lastName}</h3>
+        <div className = 'host'>
+            <h3>Hosted by {spot?.Owner.firstName} , {spot?.Owner.lastName}</h3>
+            <p>
+            {spot?.description}
+            </p>
+        </div>
 
 
 

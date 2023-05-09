@@ -40,6 +40,7 @@ export const getAllSpots = () => async(dispatch) => {
 
 //reducer
 const initialstate = {allspot:{},single:{}}
+
 const spotsReducer = (state = initialstate, action)=> {
 switch(action.type){
     case GET_ALL_SPOTS:{
