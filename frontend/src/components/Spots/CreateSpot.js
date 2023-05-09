@@ -118,6 +118,7 @@ function CreateSpot  (){
         if(Object.values(er).length >0)
         setErrors(er)
         else{
+            //dispatch spot and dispatch the images (through for loops)
 
         }
     }
