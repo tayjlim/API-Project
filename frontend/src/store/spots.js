@@ -2,39 +2,56 @@ import { csrfFetch } from "./csrf";
 
 //store as variable
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS'
-
+const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT'
 
 //action creators
 export const getallspots = (spots) => ({
     type: GET_ALL_SPOTS,
-    spots // spots
+    payload: spots // spots
   });
+
+export const getspot = (spot) =>({
+  type: GET_SINGLE_SPOT,
+  payload: spot
+})
 
 
 //Thunk Action creators
-export const getAllSpots = () => async(dispatch) => {
-    const res = await csrfFetch('/api/spots');
+export const getSpot = (spotId) => async (dispatch)=>{
+  const response = await csrfFetch(`/api/spots/${spotId}`);
+  if(response.ok){
+    const spot = await response.json();
+    await dispatch(getspot(spot))
+    return spot
+  }else{}
+}
 
-    if(res.ok) {
-      const spots = await res.json();
-      dispatch(getallspots(spots));
+export const getAllSpots = () => async(dispatch) => {
+    const response = await csrfFetch('/api/spots');
+
+    if(response.ok) {
+      const spots = await response.json();
+      await dispatch(getallspots(spots));
       return spots;
-    } else {
-      const errors = await res.json();
-      return errors;
-    }
+    } else{}
   }
 
 
 
 //reducer
-const spotsReducer = (state = {}, action)=> {
+const initialstate = {allspot:{},single:{}}
+const spotsReducer = (state = initialstate, action)=> {
 switch(action.type){
     case GET_ALL_SPOTS:{
-        let spots = {};
-        console.log('finding what to key', action.spots.Spots)
-        action.spots.Spots.forEach(spot => spots[spot.id]=spot)
+        let spots = {...state,allspot:{...state.allspot}};
+        action.payload.Spots.forEach(spot => spots[spot.id]=spot)
         return spots;
+    }
+
+    case GET_SINGLE_SPOT:{
+      const spot = {...state,single:{}};
+      spot.single = action.payload
+      return spot;
     }
     default:
         return state
