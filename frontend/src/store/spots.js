@@ -42,7 +42,9 @@ export const getAllSpots = () => async(dispatch) => {
 const initialstate = {allspot:{},single:{}}
 
 const spotsReducer = (state = initialstate, action)=> {
+  
 switch(action.type){
+
     case GET_ALL_SPOTS:{
         let spots = {...state,allspot:{...state.allspot}};
         action.payload.Spots.forEach(spot => spots[spot.id]=spot)
@@ -54,6 +56,8 @@ switch(action.type){
       spot.single = action.payload
       return spot;
     }
+
+
     default:
         return state
 

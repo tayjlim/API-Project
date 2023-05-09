@@ -22,3 +22,20 @@
 #p{
     font:bold;
 }
+
+.reserveContainer{
+    display:flex;
+    justify-content: center;
+    width:40%;
+    border-style: groove;
+}
+
+.hostReserveContainer{
+    display:flex;
+
+}
+.imageBox{
+    width:  40%;
+    display:flex;
+    flex-direction: column;
+}

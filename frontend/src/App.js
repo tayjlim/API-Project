@@ -26,8 +26,12 @@ function App() {
           </Route>
 
           <Route exact path = '/spots/:spotId'>
-         <DetailSpot/>
+            <DetailSpot/>
           </Route>
+
+          <Route exact path = '/spots/new'>
+          </Route>
+
         </Switch>
       }
 
