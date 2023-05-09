@@ -12,7 +12,12 @@ function CreateSpot  (){
     const [description, setDescription] = useState('');
     const [name,setName] = useState('')
     const [price,setPrice] = useState('')
-    const [previewImage, setPreviewImage] = useState('')
+
+    const [previewImage, setPreviewImage] = useState({
+
+        url:'',
+        preview:true
+    })
 
     const [errors, setErrors] = useState({})
 
@@ -37,11 +42,71 @@ function CreateSpot  (){
     const history = useHistory();
 
 
+    //handle submit function
+
+    const handleSubmit = async (e) =>
+    {   //make spot
+        const spot ={
+            country,
+            lng,
+            lat,
+            address,
+            city,
+            state,
+            description,
+            name,
+            price,
+        }
+        e.preventDefault();
+        const er = {}
+        // createing the error object
+        //Country
+        if(!country || country === null || country === '')
+        er.country = 'Country is required'
+        //address
+        if(!address || address === null || address === '')
+        er.address = 'Address is required'
+
+        if(!city || city === null || city === '')
+        er.city = 'City is required'
+
+        if(!state || state === null || state === '')
+        er.state = 'State is required'
+
+        if(description.length <30)
+        er.description = 'Description needs to be minimum of 30 characters'
+
+        if(!name || name === null || name === '')
+        er.name = 'Name is Required'
+
+        if(!price)
+        er.price = 'Price is required'
+
+        //image error handling
+        const validFiles = ['png','jpg','jpeg']
+        if(previewImage){
+            let split = previewImage.split('.')
+            if(validFiles.includes(split[1])) 
+        }
+
+
+
+        //error setter
+        if(Object.values(er).length >0)
+        setErrors(er)
+
+        else{
+
+        }
+    }
+
     return(
         <div id = 'createSpot'>
-        <form>
+        <form onSubmit={handleSubmit()}>
+        <div className = ''>
         <h1>Create a new Spot</h1>
-
+        <h2>Where is your place located?</h2>
+        </div>
         <div className = 'countryDiv'>
             <label>Country</label>
                 <input
@@ -54,7 +119,7 @@ function CreateSpot  (){
         </div>
 
         <div className ='addressDiv'>
-            <h2>Where is your place located?</h2>
+
             <label>Address</label>
                 <input
                 name='address'
@@ -143,8 +208,56 @@ function CreateSpot  (){
     </div>
 
     <div className = 'imageInputDiv'>
-        
+        <h2>Liven up with your spot with Photos</h2>
+        <input
+        name = 'previewImage'
+        type = 'text'
+        value = {previewImage.url}
+        placeholder='Preview Image URL'
+        onChange = {(e)=>setPreviewImage({url:e.target.value,preview:true})}
+        />
+
+        <input
+        name = 'img1'
+        type = 'text'
+        value = {img1.url}
+        placeholder='Preview Image URL'
+        onChange = {(e)=>setImg1({url:e.target.value,preview:true})}
+        />
+
+        <input
+        name = 'img2'
+        type = 'text'
+        value = {img2.url}
+        placeholder='Preview Image URL'
+        onChange = {(e)=>setImg2({url:e.target.value,preview:true})}
+        />
+
+        <input
+        name = 'img3'
+        type = 'text'
+        value = {img3.url}
+        placeholder='Preview Image URL'
+        onChange = {(e)=>setImg3({url:e.target.value,preview:true})}
+        />
+
+        <input
+        name = 'img4'
+        type = 'text'
+        value = {img4.url}
+        placeholder='Preview Image URL'
+        onChange = {(e)=>setImg4({url:e.target.value,preview:true})}
+        />
     </div>
+    <div className = 'submitDiv'>
+
+    <button className = 'submitButton'>
+    SUBMIT
+    </button>
+
+    </div>
+
+
     </form>
 </div>
         )

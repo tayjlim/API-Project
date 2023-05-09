@@ -6,3 +6,7 @@ body,textarea,input {
 .topHeaders,.price{
   font-family: 'Pokemon Solid', sans-serif;
 }
+
+h2,h1{
+  font-family: 'Pokemon Solid', sans-serif;
+}
