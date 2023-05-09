@@ -2,3 +2,32 @@
     display: none;
 }
 
+#homebttn{
+
+border-radius: 2px;
+align-items: center;
+justify-content: center;
+}
+
+#navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid;
+}
+li{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fas{
+    margin-bottom: 20px;
+    justify-content: center;
+
+}
+
+ul {
+    list-style-type: none;
+    padding: 5px;
+  }
