@@ -25,6 +25,12 @@ function LoginFormModal() {
       });
   };
 
+  const signin = (e) =>{
+    e.preventDefault();
+    return dispatch (sessionActions.login({credential: 'Demo-lition', password:'password'}))
+    .then(closeModal)
+  }
+
   return (
     <>
       <h1>Log In</h1>
@@ -38,6 +44,7 @@ function LoginFormModal() {
             required
           />
         </label>
+
         <label>
           Password
           <input
@@ -50,8 +57,13 @@ function LoginFormModal() {
         {errors.credential && (
           <p>{errors.credential}</p>
         )}
-        <button type="submit" className = 'login-button'>Log In</button >
+        <button type="submit" className = 'login-button'>Log In </button>
+        <button id = 'demoUser' onClick = {(e) => signin(e)}>
+        DEMO USER
+    </button>
       </form>
+
+
     </>
   );
 }

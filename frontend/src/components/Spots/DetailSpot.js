@@ -7,15 +7,14 @@ const DetailSpot = () =>{
 
 const {spotId} = useParams();
 const dispatch = useDispatch();
-// state.spots.single.spot
 const spot = useSelector((state) => state.spots.single.spot)
-console.log('this is spot', spot)
-
+console.log(spot)
 useEffect(()=>{
     dispatch(getSpot(spotId))
 },[dispatch,spotId])
 
 return(
+
     <div className = ''>
         <div className ='topHeaders'>
             <h1>{spot?.name}</h1>
@@ -24,18 +23,40 @@ return(
 
         <div className ='imageBox'>
             <img src = {spot?.SpotImages[0].url}/>
-        </div>
+
+            <div className = 'hostReserveContainer'>
 
         <div className = 'host'>
-            <h3>Hosted by {spot?.Owner.firstName} , {spot?.Owner.lastName}</h3>
+            <h3>Hosted By: {spot?.Owner.firstName} , {spot?.Owner.lastName}</h3>
             <p>
             {spot?.description}
             </p>
         </div>
 
+        <div className = 'reserveContainer'>
+            <p className = 'priceP'>
+                ${spot?.price} Night
+            </p>
+
+            <p className = 'starNumreviews'>
+                <i className="fa-solid fa-star" />
+                {Number(spot?.avgStarRating)? " " + Number(spot?.avgStarRating).toFixed(2): 'New'}
+                {Number(spot?.numReviews) === 1
+                    ? ` · ${spot?.numReviews} review`
+                    : spot?.numReviews < 1
+                    ? null
+                    : ` · ${spot?.numReviews} reviews`}
+
+            </p>
+        </div>
+
+        </div>
+
+     </div>
 
 
     </div>
     )
+
 }
 export default DetailSpot;
