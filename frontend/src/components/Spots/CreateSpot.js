@@ -61,7 +61,7 @@ function CreateSpot  (){
         }
         const validFiles = ['png','jpg','jpeg']
         const validImages =[];
-        const er = {}
+        const er = {};
         // createing the error object
         //Country
         if(!country || country === null || country === '')
@@ -125,7 +125,7 @@ function CreateSpot  (){
 
     return(
         <div id = 'createSpot'>
-        <form onSubmit={handleSubmit()}>
+        <form onSubmit={handleSubmit}>
         <div className = ''>
         <h1>Create a new Spot</h1>
         <h2>Where is your place located?</h2>

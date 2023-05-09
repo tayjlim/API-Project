@@ -10,3 +10,9 @@ body,textarea,input {
 h2,h1{
   font-family: 'Pokemon Solid', sans-serif;
 }
+
+.pErrors{
+  color:red;
+  margin:4px;
+  font-size:smaller
+}
