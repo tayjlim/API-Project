@@ -12,6 +12,7 @@ function CreateSpot  (){
     const [description, setDescription] = useState('');
     const [name,setName] = useState('')
     const [price,setPrice] = useState('')
+    const [errors, setErrors] = useState({})
 
     const [previewImage, setPreviewImage] = useState({
 
@@ -19,7 +20,6 @@ function CreateSpot  (){
         preview:true
     })
 
-    const [errors, setErrors] = useState({})
 
     const [img1, setImg1] = useState({
         url:'',
@@ -46,6 +46,8 @@ function CreateSpot  (){
 
     const handleSubmit = async (e) =>
     {   //make spot
+        e.preventDefault();
+
         const spot ={
             country,
             lng,
@@ -57,7 +59,8 @@ function CreateSpot  (){
             name,
             price,
         }
-        e.preventDefault();
+        const validFiles = ['png','jpg','jpeg']
+        const validImages =[];
         const er = {}
         // createing the error object
         //Country
@@ -82,19 +85,38 @@ function CreateSpot  (){
         if(!price)
         er.price = 'Price is required'
 
+        if(!previewImage) er.previewImage = 'Preview Image is required!'
+
         //image error handling
-        const validFiles = ['png','jpg','jpeg']
+
         if(previewImage){
-            let split = previewImage.split('.')
-            if(validFiles.includes(split[1])) 
+            let split = previewImage.url.split('.')
+            !validFiles.includes(split[1]) ? er.previewImage = 'Image URL must end in .png, .jpg, or .jpeg' : validImages.push(previewImage)
         }
 
+        if(img1.url){
+            let split = img1.url.split('.')
+            !validFiles.includes(split[split.length-1]) ? er.img1 = 'Image URL must end in .png, .jpg, or .jpeg' : validImages.push(img1)
+        }
 
+        if(img2.url){
+            let split = img2.url.split('.')
+            !validFiles.includes(split[split.length-1]) ? er.img2 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img2)
+        }
+
+        if(img3.url){
+            let split = img3.url.split('.')
+            !validFiles.includes(split[split.length-1]) ? er.img3 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img3)
+        }
+
+        if(img4.url){
+            let split = img4.url.split('.')
+            !validFiles.includes(split[split.length-1]) ? er.img4 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img4)
+        }
 
         //error setter
         if(Object.values(er).length >0)
         setErrors(er)
-
         else{
 
         }
