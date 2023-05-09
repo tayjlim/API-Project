@@ -139,10 +139,10 @@ function CreateSpot  (){
                 placeholder='Please Enter Country'
                 onChange = {(e) => setCountry(e.target.value)}
                 />
+                <p className='pErrors'>{errors.country}</p>
         </div>
 
         <div className ='addressDiv'>
-
             <label>Address</label>
                 <input
                 name='address'
@@ -151,7 +151,9 @@ function CreateSpot  (){
                 placeholder='Enter Valid Address'
                 onChange = {(e)=> setAddress(e.target.value)}
                 />
+                <p className='pErrors'>{errors.address}</p>
         </div>
+
 <div className = 'citystateDiv'>
 
         <div className='cityDiv'>
@@ -163,6 +165,7 @@ function CreateSpot  (){
                 placeholder = 'City'
                 onChange = {(e)=>setCity(e.target.value)}
                 />
+                <p className='pErrors'>{errors.city}</p>
         </div>
 
         <div className = 'stateDiv'>
@@ -174,6 +177,8 @@ function CreateSpot  (){
             placeholder='Please Enter State'
             onChange = {(e) => setState(e.target.value)}
             />
+            <p className='pErrors'>{errors.state}</p>
+
         </div>
 </div>
 
