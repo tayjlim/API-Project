@@ -1,4 +1,8 @@
 /* TODO Add site wide styles */
 body,textarea,input {
-    font-family: sans-serif;
-  }
+  font-family: "Poppins", sans-serif;
+}
+
+.topHeaders,.price{
+  font-family: 'Pokemon Solid', sans-serif;
+}
