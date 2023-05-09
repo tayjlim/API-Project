@@ -85,13 +85,13 @@ function CreateSpot  (){
         if(!price)
         er.price = 'Price is required'
 
-        if(!previewImage) er.previewImage = 'Preview Image is required!'
+        if(!previewImage || previewImage===null || previewImage.url === '') er.previewImage = 'Preview Image is required!'
 
         //image error handling
 
         if(previewImage){
             let split = previewImage.url.split('.')
-            !validFiles.includes(split[1]) ? er.previewImage = 'Image URL must end in .png, .jpg, or .jpeg' : validImages.push(previewImage)
+            !validFiles.includes(split[split.length-1]) ? er.previewImage1 = 'Image URL must end in .png, .jpg, or .jpeg' : validImages.push(previewImage)
         }
 
         if(img1.url){
@@ -194,6 +194,8 @@ function CreateSpot  (){
     placeholder='Please write atleast 30 characters'
     onChange = {(e) => setDescription(e.target.value)}
     />
+    <p className='pErrors'>{errors.description}</p>
+
 </div>
 <div className = 'titleDiv'>
 
@@ -212,6 +214,8 @@ function CreateSpot  (){
         placeholder='Name of your spot'
         onChange = {(e) => setName(e.target.value)}
         />
+        <p className='pErrors'>{errors.name}</p>
+
 </div>
 
     <div className ='priceDiv'>
@@ -232,6 +236,8 @@ function CreateSpot  (){
         placeholder = 'Price per night (USD)'
         onChange = {(e)=>setPrice(e.target.value)}
         />
+        <p className='pErrors'>{errors.price}</p>
+
 
     </div>
 
@@ -244,6 +250,11 @@ function CreateSpot  (){
         placeholder='Preview Image URL'
         onChange = {(e)=>setPreviewImage({url:e.target.value,preview:true})}
         />
+        <p className='pErrors'>{errors.previewImage}</p>
+        <p className='pErrors'>{errors.previewImage1}</p>
+
+
+
 
         <input
         name = 'img1'
@@ -252,6 +263,8 @@ function CreateSpot  (){
         placeholder='Preview Image URL'
         onChange = {(e)=>setImg1({url:e.target.value,preview:true})}
         />
+        <p className='pErrors'>{errors.img1}</p>
+
 
         <input
         name = 'img2'
@@ -260,6 +273,8 @@ function CreateSpot  (){
         placeholder='Preview Image URL'
         onChange = {(e)=>setImg2({url:e.target.value,preview:true})}
         />
+        <p className='pErrors'>{errors.img2}</p>
+
 
         <input
         name = 'img3'
@@ -268,6 +283,8 @@ function CreateSpot  (){
         placeholder='Preview Image URL'
         onChange = {(e)=>setImg3({url:e.target.value,preview:true})}
         />
+        <p className='pErrors'>{errors.img3}</p>
+
 
         <input
         name = 'img4'
@@ -276,6 +293,8 @@ function CreateSpot  (){
         placeholder='Preview Image URL'
         onChange = {(e)=>setImg4({url:e.target.value,preview:true})}
         />
+        <p className='pErrors'>{errors.img4}</p>
+
     </div>
     <div className = 'submitDiv'>
 
