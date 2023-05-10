@@ -8,7 +8,6 @@ const DetailSpot = () =>{
 const {spotId} = useParams();
 const dispatch = useDispatch();
 const spot = useSelector((state) => state.spots.single.spot)
-console.log(spot)
 useEffect(()=>{
     dispatch(getSpot(spotId))
 },[dispatch,spotId])
