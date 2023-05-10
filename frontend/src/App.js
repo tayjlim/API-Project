@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 import Spots from "./components/Spots";
 import DetailSpot from "./components/Spots/DetailSpot";
 import CreateSpot from './components/Spots/CreateSpot.js'
-
+import SpotsCurrentUser from "./components/Spots/SpotsCurrentUser";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,10 +23,9 @@ function App() {
         isLoaded &&
         <Switch>
 
-          <Route exact path = '/'>
-            <Spots/>
+          <Route exact path = '/spots/current'>
+          <SpotsCurrentUser/>
           </Route>
-
 
           <Route exact path = '/spots/new'>
             <CreateSpot/>
@@ -35,6 +34,10 @@ function App() {
           <Route exact path = '/spots/:spotId'>
           <DetailSpot/>
           </Route>
+
+        <Route exact path = '/'>
+          <Spots/>
+        </Route>
 
 
         </Switch>
