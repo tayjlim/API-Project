@@ -33,7 +33,18 @@ function SpotsCurrentUser () {
         <h1>Manage Your Spots</h1>
         <button onClick = {newSpotButton}> Create a New Spot</button>
             <div className = 'allContainer'>
-            {currentUserSpots.map(spot=> <SpotItem spot={spot}/>)}
+            {currentUserSpots.map(spot=>
+                <div className = 'currentUserBox'>
+
+                <SpotItem spot={spot}/>
+                    <div className = 'buttonDiv'>
+                    <button className = 'updateButton'>Update</button>
+                    <button className = 'deleteButton'>Delete</button>
+                    </div>
+                </div>
+
+            )}
+
             </div>
         </div>)
 }

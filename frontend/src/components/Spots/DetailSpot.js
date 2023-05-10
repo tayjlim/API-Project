@@ -15,7 +15,7 @@ useEffect(()=>{
 
 return(
 
-    <div className = ''>
+    <div>
         <div className ='topHeaders'>
             <h1>{spot?.name}</h1>
             <h2>{spot?.city}, {spot?.state}, {spot?.country}</h2>
