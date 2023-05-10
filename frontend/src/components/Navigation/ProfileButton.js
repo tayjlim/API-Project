@@ -46,10 +46,11 @@ function ProfileButton({ user }) {
       <div className = 'createDiv'>
           {user ? (
           <Link to ='/spots/new'>
-          <p>
-          Create a New Spot
-          </p>
+            <p>
+            Create a New Spot
+            </p>
           </Link>
+
           ):null}
         </div>
       <button onClick={openMenu}>
@@ -65,7 +66,12 @@ function ProfileButton({ user }) {
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
-            <li> <button> Manage Spots</button></li>
+            <li>
+            <Link to ='/spots/current'>
+            <p>
+            Manage Spots
+            </p>
+          </Link></li>
           </>
             ) : (
           <>
