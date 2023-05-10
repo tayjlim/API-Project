@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
+import {Link} from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignUpFormModal/index'
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -40,10 +42,21 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
-    <>
+    <div className = 'userMenu'>
+      <div className = 'createDiv'>
+          {user ? (
+          <Link to ='/spots/new'>
+            <p>
+            Create a New Spot
+            </p>
+          </Link>
+
+          ):null}
+        </div>
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
+
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
@@ -53,8 +66,14 @@ function ProfileButton({ user }) {
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
+            <li>
+            <Link to ='/spots/current'>
+            <p>
+            Manage Spots
+            </p>
+          </Link></li>
           </>
-        ) : (
+            ) : (
           <>
             <OpenModalMenuItem
               itemText="Log In"
@@ -69,7 +88,12 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
-    </>
+
+
+    </div>
+
+
+
   );
 }
 

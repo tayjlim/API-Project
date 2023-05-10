@@ -8,14 +8,13 @@ const DetailSpot = () =>{
 const {spotId} = useParams();
 const dispatch = useDispatch();
 const spot = useSelector((state) => state.spots.single.spot)
-console.log(spot)
 useEffect(()=>{
     dispatch(getSpot(spotId))
 },[dispatch,spotId])
 
 return(
 
-    <div className = ''>
+    <div>
         <div className ='topHeaders'>
             <h1>{spot?.name}</h1>
             <h2>{spot?.city}, {spot?.state}, {spot?.country}</h2>

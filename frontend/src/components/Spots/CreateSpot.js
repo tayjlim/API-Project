@@ -1,10 +1,12 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux'
 import {useHistory} from 'react-router-dom'
+import { createSpot,addImage } from '../../store/spots';
+
 
 function CreateSpot  (){
-    const [lng] = useState('null')
-    const [lat] = useState('null')
+    const [lng] = useState()
+    const [lat] = useState()
     const [country, setCountry] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -13,13 +15,11 @@ function CreateSpot  (){
     const [name,setName] = useState('')
     const [price,setPrice] = useState('')
     const [errors, setErrors] = useState({})
-
+    
     const [previewImage, setPreviewImage] = useState({
-
         url:'',
         preview:true
     })
-
 
     const [img1, setImg1] = useState({
         url:'',
@@ -117,19 +117,27 @@ function CreateSpot  (){
         //error setter
         if(Object.values(er).length >0)
         setErrors(er)
+
         else{
             //dispatch spot and dispatch the images (through for loops)
-
+           const newSpot =  await dispatch(createSpot(spot))
+           // add images to corresponding spot!
+            for(let image of validImages){
+            await dispatch(addImage(newSpot.id,image))
+            }
+            history.push(`/spots/${newSpot.id}`)
         }
     }
 
     return(
         <div id = 'createSpot'>
         <form onSubmit={handleSubmit}>
-        <div className = ''>
+
+        <div className = 'topForm'>
         <h1>Create a new Spot</h1>
         <h2>Where is your place located?</h2>
         </div>
+
         <div className = 'countryDiv'>
             <label>Country</label>
                 <input
@@ -306,7 +314,7 @@ function CreateSpot  (){
 
 
     </form>
-</div>
+        </div>
         )
 }
 

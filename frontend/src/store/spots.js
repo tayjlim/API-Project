@@ -36,13 +36,51 @@ export const getAllSpots = () => async(dispatch) => {
     } else{}
   }
 
+export const createSpot = (spot) => async (dispatch) =>{
+  const response = await csrfFetch('/api/spots',{
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(spot),
+  })
+  if(response.ok){
+  const data = await response.json()
+  return data
+  }
+}
+
+export const updateSpot = (spot) => async (dispatch) =>{
+
+
+}
+
+export const addImage = (spotId,imgs) => async (dispatch) =>{
+
+  const response = await csrfFetch (`/api/spots/${spotId}/images`,{
+    method:'POST',
+    headers:{
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(imgs)
+    })
+    if(response.ok){
+      const img = await response.json()
+      return img;
+
+    }
+
+
+}
+
+
 
 
 //reducer
 const initialstate = {allspot:{},single:{}}
 
 const spotsReducer = (state = initialstate, action)=> {
-  
+
 switch(action.type){
 
     case GET_ALL_SPOTS:{
