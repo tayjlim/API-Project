@@ -1,10 +1,13 @@
 import {useState} from 'react';
 import {useDispatch} from 'react-redux'
+
 import {useHistory} from 'react-router-dom'
-import { createSpot,addImage } from '../../store/spots';
+import {useParams} from 'react-router-dom'
+
+import {updateSpot,getSpot} from '../../store/spots';
 
 
-function CreateSpot  (){
+function EditSpot () {
     const [lng] = useState()
     const [lat] = useState()
     const [country, setCountry] = useState('')
@@ -15,119 +18,10 @@ function CreateSpot  (){
     const [name,setName] = useState('')
     const [price,setPrice] = useState('')
     const [errors, setErrors] = useState({})
-    
-    const [previewImage, setPreviewImage] = useState({
-        url:'',
-        preview:true
-    })
 
-    const [img1, setImg1] = useState({
-        url:'',
-        preview:true
-    })
-    const [img2, setImg2] = useState({
-        url:'',
-        preview:true
-    })
-    const [img3, setImg3] = useState({
-        url:'',
-        preview:true
-    })
-    const [img4, setImg4] = useState({
-        url:'',
-        preview:true
-    })
-
-    const dispatch = useDispatch();
+    const {spotId} = useParams();
     const history = useHistory();
-
-
-    //handle submit function
-
-    const handleSubmit = async (e) =>
-    {   //make spot
-        e.preventDefault();
-
-        const spot ={
-            country,
-            lng,
-            lat,
-            address,
-            city,
-            state,
-            description,
-            name,
-            price,
-        }
-        const validFiles = ['png','jpg','jpeg']
-        const validImages =[];
-        const er = {};
-        // createing the error object
-        //Country
-        if(!country || country === null || country === '')
-        er.country = 'Country is required'
-        //address
-        if(!address || address === null || address === '')
-        er.address = 'Address is required'
-
-        if(!city || city === null || city === '')
-        er.city = 'City is required'
-
-        if(!state || state === null || state === '')
-        er.state = 'State is required'
-
-        if(description.length <30)
-        er.description = 'Description needs to be minimum of 30 characters'
-
-        if(!name || name === null || name === '')
-        er.name = 'Name is Required'
-
-        if(!price)
-        er.price = 'Price is required'
-
-        if(!previewImage || previewImage===null || previewImage.url === '') er.previewImage = 'Preview Image is required!'
-
-        //image error handling
-
-        if(previewImage){
-            let split = previewImage.url.split('.')
-            !validFiles.includes(split[split.length-1]) ? er.previewImage1 = 'Image URL must end in .png, .jpg, or .jpeg' : validImages.push(previewImage)
-        }
-
-        if(img1.url){
-            let split = img1.url.split('.')
-            !validFiles.includes(split[split.length-1]) ? er.img1 = 'Image URL must end in .png, .jpg, or .jpeg' : validImages.push(img1)
-        }
-
-        if(img2.url){
-            let split = img2.url.split('.')
-            !validFiles.includes(split[split.length-1]) ? er.img2 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img2)
-        }
-
-        if(img3.url){
-            let split = img3.url.split('.')
-            !validFiles.includes(split[split.length-1]) ? er.img3 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img3)
-        }
-
-        if(img4.url){
-            let split = img4.url.split('.')
-            !validFiles.includes(split[split.length-1]) ? er.img4 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img4)
-        }
-
-        //error setter
-        if(Object.values(er).length >0)
-        setErrors(er)
-
-        else{
-            //dispatch spot and dispatch the images (through for loops)
-           const newSpot =  await dispatch(createSpot(spot))
-           // add images to corresponding spot!
-            for(let image of validImages){
-            await dispatch(addImage(newSpot.id,image))
-            }
-            history.push(`/spots/${newSpot.id}`)
-        }
-    }
+    const dispatch = useDispatch();
 
     return(
         <div id = 'createSpot'>
@@ -315,7 +209,8 @@ function CreateSpot  (){
 
     </form>
         </div>
-        )
+    )
+
 }
 
-export default CreateSpot
+export default EditSpot

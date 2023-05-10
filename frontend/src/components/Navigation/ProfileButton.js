@@ -65,6 +65,7 @@ function ProfileButton({ user }) {
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
+            <li> <button> Manage Spots</button></li>
           </>
             ) : (
           <>
@@ -81,6 +82,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
+
 
     </div>
 
