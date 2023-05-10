@@ -15,11 +15,14 @@ function EditSpot () {
     const dispatch = useDispatch();
 
     const spot = useSelector((state) => state.spots.single.spot)
-   
+    // if(!spot.spotImages || (Object.values(spot).length === 0 && Object.values(reviewsObj).length === 0)) {
+    //     return null;
+    //   }
+
     const [lng] = useState()
     const [lat] = useState()
-    const [country, setCountry] = useState(spot.country)
-    const [address, setAddress] = useState(spot.address)
+    const [country, setCountry] = useState('')
+    const [address, setAddress] = useState('')
     const [city, setCity] = useState()
     const [state,setState] = useState('')
     const [description, setDescription] = useState('');
@@ -33,10 +36,10 @@ function EditSpot () {
     },[dispatch,spotId])
 
     const handleSubmit = async (e) =>{
-
         e.preventDefault();
 
         const updatedSpot ={
+
         }
 
     }
