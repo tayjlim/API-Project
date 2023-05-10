@@ -126,10 +126,12 @@ function CreateSpot  (){
     return(
         <div id = 'createSpot'>
         <form onSubmit={handleSubmit}>
-        <div className = ''>
+
+        <div className = 'topForm'>
         <h1>Create a new Spot</h1>
         <h2>Where is your place located?</h2>
         </div>
+
         <div className = 'countryDiv'>
             <label>Country</label>
                 <input
@@ -306,7 +308,7 @@ function CreateSpot  (){
 
 
     </form>
-</div>
+        </div>
         )
 }
 

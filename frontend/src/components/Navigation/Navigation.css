@@ -14,6 +14,7 @@ justify-content: center;
     flex-direction: row;
     justify-content: space-between;
     border-bottom: solid;
+    margin-bottom: 0;
 }
 li{
     display:flex;
@@ -31,4 +32,3 @@ ul {
     list-style-type: none;
     padding: 5px;
   }
-
