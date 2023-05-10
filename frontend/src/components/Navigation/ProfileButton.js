@@ -66,7 +66,7 @@ function ProfileButton({ user }) {
               <button onClick={logout}>Log Out</button>
             </li>
           </>
-        ) : (
+            ) : (
           <>
             <OpenModalMenuItem
               itemText="Log In"
