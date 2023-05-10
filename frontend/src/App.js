@@ -9,6 +9,8 @@ import Spots from "./components/Spots";
 import DetailSpot from "./components/Spots/DetailSpot";
 import CreateSpot from './components/Spots/CreateSpot.js'
 import SpotsCurrentUser from "./components/Spots/SpotsCurrentUser";
+import EditSpot from "./components/Spots/EditSpot";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -16,12 +18,19 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+
+
+
   return (
     <>
       <Navigation isLoaded={isLoaded} />
       {
         isLoaded &&
         <Switch>
+
+        <Route exact path = '/'>
+        <Spots/>
+        </Route>
 
           <Route exact path = '/spots/current'>
           <SpotsCurrentUser/>
@@ -31,13 +40,16 @@ function App() {
             <CreateSpot/>
           </Route>
 
+
           <Route exact path = '/spots/:spotId'>
           <DetailSpot/>
           </Route>
 
-        <Route exact path = '/'>
-          <Spots/>
-        </Route>
+
+
+        <Route exact path = '/spots/:spotId/edit'>
+          <EditSpot/>
+          </Route>
 
 
         </Switch>

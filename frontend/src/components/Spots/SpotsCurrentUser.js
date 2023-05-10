@@ -17,17 +17,19 @@ function SpotsCurrentUser () {
         return history.push('/spots/new')
     }
 
+
+
     Allspots.forEach((spot)=>{
         if(spot.ownerId === current.id)
         currentUserSpots.push(spot)
     })
 
-    // console.log('currentUserSpots', currentUserSpots)
+    console.log('currentUserSpots', currentUserSpots)
 
     useEffect(() => {
         dispatch(getAllSpots())
     },[dispatch])
-
+//()=>history.push(`/spots/${spot.id}/edit`)
     return (
         <div>
         <h1>Manage Your Spots</h1>
@@ -35,10 +37,9 @@ function SpotsCurrentUser () {
             <div className = 'allContainer'>
             {currentUserSpots.map(spot=>
                 <div className = 'currentUserBox'>
-
                 <SpotItem spot={spot}/>
                     <div className = 'buttonDiv'>
-                    <button className = 'updateButton'>Update</button>
+                    <button className = 'updateButton' onClick ={()=>history.push(`/spots/${spot.id}/edit`)}>Update</button>
                     <button className = 'deleteButton'>Delete</button>
                     </div>
                 </div>
