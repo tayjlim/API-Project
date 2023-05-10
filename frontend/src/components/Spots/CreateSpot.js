@@ -15,7 +15,7 @@ function CreateSpot  (){
     const [name,setName] = useState('')
     const [price,setPrice] = useState('')
     const [errors, setErrors] = useState({})
-    
+
     const [previewImage, setPreviewImage] = useState({
         url:'',
         preview:true

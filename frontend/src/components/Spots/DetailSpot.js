@@ -6,8 +6,10 @@ import { useEffect } from "react";
 const DetailSpot = () =>{
 
 const {spotId} = useParams();
+
 const dispatch = useDispatch();
 const spot = useSelector((state) => state.spots.single.spot)
+
 useEffect(()=>{
     dispatch(getSpot(spotId))
 },[dispatch,spotId])

@@ -8,30 +8,42 @@ import {updateSpot,getSpot} from '../../store/spots';
 
 
 function EditSpot () {
-    const [lng] = useState()
-    const [lat] = useState()
-    const [country, setCountry] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state,setState] = useState('')
-    const [description, setDescription] = useState('');
-    const [name,setName] = useState('')
-    const [price,setPrice] = useState('')
-    const [errors, setErrors] = useState({})
+
 
     const {spotId} = useParams();
     const history = useHistory();
     const dispatch = useDispatch();
 
     const spot = useSelector((state) => state.spots.single.spot)
+   
+    const [lng] = useState()
+    const [lat] = useState()
+    const [country, setCountry] = useState(spot.country)
+    const [address, setAddress] = useState(spot.address)
+    const [city, setCity] = useState()
+    const [state,setState] = useState('')
+    const [description, setDescription] = useState('');
+    const [name,setName] = useState('')
+    const [price,setPrice] = useState('')
+    const [errors, setErrors] = useState({})
+
 
     useEffect(()=>{
         dispatch(getSpot(spotId))
     },[dispatch,spotId])
 
+    const handleSubmit = async (e) =>{
+
+        e.preventDefault();
+
+        const updatedSpot ={
+        }
+
+    }
+
     return(
         <div className ='ediSpotDiv'>
-        <form>
+        <form onSubmit = {handleSubmit}>
             <div className ='topForm'>
                 <h1>Update your Spot</h1>
                 <h2>Where's your place located?</h2>
@@ -42,7 +54,7 @@ function EditSpot () {
                 <input
                 name='country'
                 type = 'text'
-                value = {spot.country}
+                value = {country}
                 placeholder='Please Enter Country'
                 onChange = {(e) => setCountry(e.target.value)}
                 />
