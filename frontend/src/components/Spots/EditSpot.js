@@ -15,12 +15,7 @@ function EditSpot () {
     const dispatch = useDispatch();
 
     const spot = useSelector((state) => state.spots.single.spot)
-    // if(!spot.spotImages || (Object.values(spot).length === 0 && Object.values(reviewsObj).length === 0)) {
-    //     return null;
-    //   }
 
-    const [lng] = useState()
-    const [lat] = useState()
     const [country, setCountry] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState()
@@ -30,22 +25,30 @@ function EditSpot () {
     const [price,setPrice] = useState('')
     const [errors, setErrors] = useState({})
 
-
     useEffect(()=>{
         dispatch(getSpot(spotId))
     },[dispatch,spotId])
 
+
     const handleSubmit = async (e) =>{
-        e.preventDefault();
+    e.preventDefault()
 
         const updatedSpot ={
-
+            country,
+            address,
+            city,
+            state,
+            description,
+            name,
+            price,
         }
 
     }
 
+    if(!spot)return null // need guard to avoid chaining
+
     return(
-        <div className ='ediSpotDiv'>
+        <div className ='editSpotDiv'>
         <form onSubmit = {handleSubmit}>
             <div className ='topForm'>
                 <h1>Update your Spot</h1>
@@ -57,7 +60,7 @@ function EditSpot () {
                 <input
                 name='country'
                 type = 'text'
-                value = {country}
+                value = {spot.country}
                 placeholder='Please Enter Country'
                 onChange = {(e) => setCountry(e.target.value)}
                 />

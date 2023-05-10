@@ -4,19 +4,18 @@ import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const DetailSpot = () =>{
-
 const {spotId} = useParams();
-
 const dispatch = useDispatch();
-const spot = useSelector((state) => state.spots.single.spot)
 
-if(!spot.SpotImages || (Object.values(spot).length === 0)) {
-    return null;
-  }
+
+
 
 useEffect(()=>{
-    dispatch(getSpot(spotId))
+dispatch(getSpot(spotId))
 },[dispatch,spotId])
+
+const spot = useSelector((state) => state.spots.single.spot)
+if(!spot)return null // need guard
 
 return(
 
