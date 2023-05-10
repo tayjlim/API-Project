@@ -34,7 +34,7 @@ return(
         <div className = 'host'>
             <h3>Hosted By: {spot.Owner.firstName} , {spot.Owner.lastName}</h3>
             <p>
-            {spot?.description}
+            {spot.description}
             </p>
         </div>
 
@@ -48,7 +48,7 @@ return(
                 {Number(spot.avgStarRating)? " " + Number(spot.avgStarRating).toFixed(2): 'New'}
                 {Number(spot.numReviews) === 1
                     ? ` · ${spot.numReviews} review`
-                    : spot?.numReviews < 1
+                    : spot.numReviews < 1
                     ? null
                     : ` · ${spot.numReviews} reviews`}
             </p>
