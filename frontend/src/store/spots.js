@@ -36,13 +36,27 @@ export const getAllSpots = () => async(dispatch) => {
     } else{}
   }
 
+export const createSpot = (spot) => async (dispatch) =>{
+  const response = await csrfFetch('/api/spots',{
+    method: 'POST',
+    headers:{
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(spot),
+  })
+  if(response.ok){
+  const data = await response.json()
+  return data
+  }
+}
+
 
 
 //reducer
 const initialstate = {allspot:{},single:{}}
 
 const spotsReducer = (state = initialstate, action)=> {
-  
+
 switch(action.type){
 
     case GET_ALL_SPOTS:{
