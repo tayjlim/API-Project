@@ -146,7 +146,6 @@ switch(action.type){
 
       // console.log('-----what is newState--------------', newState)
       newState.allspots[action.spot.id] = action.spot
-
       // console.log('-----what is new State.all spots -----', newState.allspots[action.spot.id])
       return newState
     }

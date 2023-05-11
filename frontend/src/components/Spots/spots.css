@@ -33,11 +33,11 @@ max-height: 133.3px;
     border-style: groove;
 }
 
-.hostReserveContainer{
+.hostAndReviews{
     display:flex;
 
 }
-.imageBox{
+.detailSpotContainer{
     width:  70%;
     display:flex;
     flex-direction: column;
