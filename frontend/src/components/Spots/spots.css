@@ -35,6 +35,7 @@ max-height: 133.3px;
 
 .hostAndReviews{
     display:flex;
+    border-bottom: solid;
 
 }
 .detailSpotContainer{
@@ -42,7 +43,11 @@ max-height: 133.3px;
     display:flex;
     flex-direction: column;
 }
-
+.detailSpotdiv{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
 .starNumReviews{
     width:500px;
 }

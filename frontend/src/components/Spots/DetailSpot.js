@@ -31,7 +31,8 @@ if(!spot.SpotImages)return null // need guard
 else
 return(
 
-<div>
+<div className = 'detailSpotdiv'>
+
         <div className ='topHeaders'>
             <h1>{spot.name}</h1>
             <h2>{spot.city}, {spot.state}, {spot.country}</h2>
@@ -39,7 +40,7 @@ return(
 
     <div className ='detailSpotContainer'>
         <div className = 'detailImageDiv'>
-            <img src = {spot.SpotImages[0].url}/>
+            <img src = {spot.SpotImages[0].url}  className = 'firstImage'/>
         </div>
 
         <div className = 'hostAndReviews'>
@@ -68,12 +69,28 @@ return(
             </div>
         </div>
 
-        <div className = 'reviewsList'>
-                <ul>
-                    {}
-                </ul>
+        <div className = 'reviewsDivDetailBottom'>
+
+        <div className = 'starnumreviewsDiv'>
+            <p className = 'starNumreviews'>
+        <i className="fa-solid fa-star" />
+        {Number(spot.avgStarRating)? " " + Number(spot.avgStarRating).toFixed(2): 'New'}
+        {Number(spot.numReviews) === 1
+            ? ` · ${spot.numReviews} review`
+            : spot.numReviews < 1
+            ? null
+            : ` · ${spot.numReviews} reviews`}
+            </p>
         </div>
-    </div>
+
+        <div className = 'reviewLoopdiv'>
+            {reviews.map(review=><ReviewsForSpot review = {review}/>)}
+        </div>
+
+        </div>
+
+        </div>
+
 </div>
     )
 }
