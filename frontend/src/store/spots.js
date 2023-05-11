@@ -3,16 +3,23 @@ import { csrfFetch } from "./csrf";
 //store as variable
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS'
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT'
+const UPDATE_SPOT = 'spots/UPDATE_SPOT'
+const DELETE_SPOT = 'spots/DELETE_SPOT'
 
 //action creators
 export const getallspots = (spots) => ({
     type: GET_ALL_SPOTS,
-    payload: spots // spots
+    spots // spots
   });
 
 export const getspot = (spot) =>({
   type: GET_SINGLE_SPOT,
-  payload: spot
+  spot
+})
+
+export const updatespot = (spot) => ({
+type: UPDATE_SPOT,
+spot
 })
 
 
@@ -45,18 +52,30 @@ export const createSpot = (spot) => async (dispatch) =>{
     body: JSON.stringify(spot),
   })
   if(response.ok){
+
   const data = await response.json()
   return data
-  }
+    }
 }
 
-export const updateSpot = (spot) => async (dispatch) =>{
+export const updateSpot = (spotId,updatedSpot) => async (dispatch) =>{
+const response = await csrfFetch(`/api/spots/${spotId}`,{
+  method:'PUT',
+  headers:{
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(updatedSpot)
+})
+if(response.ok){
+  const data = await response.json()
+  dispatch(updatespot(data))
+  return data
+}
 
 
 }
 
 export const addImage = (spotId,imgs) => async (dispatch) =>{
-
   const response = await csrfFetch (`/api/spots/${spotId}/images`,{
     method:'POST',
     headers:{
@@ -69,30 +88,33 @@ export const addImage = (spotId,imgs) => async (dispatch) =>{
       return img;
 
     }
-
-
 }
 
 
 
 
 //reducer
-const initialstate = {allspot:{},single:{}}
+const initialstate = {allspots:{},single:{}}
 
 const spotsReducer = (state = initialstate, action)=> {
-
 switch(action.type){
 
     case GET_ALL_SPOTS:{
-        let spots = {...state,allspot:{...state.allspot}};
-        action.payload.Spots.forEach(spot => spots[spot.id]=spot)
-        return spots;
+      const newState = {...state,allspots:{}}
+        action.spots.Spots.forEach((spot) => (newState[spot.id]=spot))
+        return newState;
     }
 
     case GET_SINGLE_SPOT:{
-      const spot = {...state,single:{}};
-      spot.single = action.payload
-      return spot;
+      const newState = {...state,single:{}};
+      spot.single = action.spot
+      return newState;
+    }
+
+    case UPDATE_SPOT:{
+      const spot = {...state,single:{},update:{}};
+      spot.single = action.spot
+      return spot
     }
 
 
