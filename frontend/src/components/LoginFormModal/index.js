@@ -63,9 +63,8 @@ function LoginFormModal() {
     </button>
       </form>
 
-
     </>
-  );
+  )
 }
 
 export default LoginFormModal;
