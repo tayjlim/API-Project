@@ -6,31 +6,31 @@ const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT'
 const UPDATE_SPOT = 'spots/UPDATE_SPOT'
 const DELETE_SPOT = 'spots/DELETE_SPOT'
 
-//action creators
+//action creators------------------------------------------------------------------------------
 export const getAllSpotsAction = (spot) =>{
   return{
     type: GET_ALL_SPOTS,
     spot // spots
   }
 };
-
+//------------------------------------------------------------------------------
 export const deleteSpotAction = (spotId) =>{
   type:DELETE_SPOT,
   spotId
 }
-
+//------------------------------------------------------------------------------
 export const getspot = (spotId) =>({
   type: GET_SINGLE_SPOT,
 payload:spotId
 })
-
+//------------------------------------------------------------------------------
 export const updatespot = (spot) => ({
 type: UPDATE_SPOT,
 spot
 })
 
 
-//Thunk Action creators
+//Thunk Action creators------------------------------------------------------------------------------
 export const getSpot = (spotId) => async (dispatch)=>{
   const response = await csrfFetch(`/api/spots/${spotId}`);
 
@@ -40,7 +40,7 @@ export const getSpot = (spotId) => async (dispatch)=>{
     return spot
   }else{}
 }
-//get all
+//get all------------------------------------------------------------------------------
 export const getAllSpots = () => async(dispatch) => {
     const response = await csrfFetch('/api/spots');
 
@@ -51,7 +51,7 @@ export const getAllSpots = () => async(dispatch) => {
 
     } else{}
   }
-//create
+//create----------------------------------------------------v----------------------------------------------------
 export const createSpot = (spot) => async (dispatch) =>{
   const response = await csrfFetch('/api/spots',{
     method: 'POST',
@@ -66,7 +66,7 @@ export const createSpot = (spot) => async (dispatch) =>{
   return data
     }
 }
-
+// update spot --------------------------------------------------------------------------------------------------------
 export const updateSpot = (spotId,updatedSpot) => async (dispatch) =>{
 const response = await csrfFetch(`/api/spots/${spotId}`,{
   method:'PUT',
@@ -82,7 +82,7 @@ if(response.ok){
 
 
 }
-
+//ADD IMAGE--------------------------------------------------------------------
 export const addImage = (spotId,imgs) => async (dispatch) =>{
   const response = await csrfFetch (`/api/spots/${spotId}/images`,{
     method:'POST',
@@ -97,14 +97,20 @@ export const addImage = (spotId,imgs) => async (dispatch) =>{
 
     }
 }
+//DELETE ------------------------------------------------------------------------------
 
+export const deleteSpot =(spotId) => async (dispatch) =>{
 
+  const response = await csrfFetch(`/api/spots/${spotId}`,{
+    method:'DELETE',
+  })
+  if(response.ok){
+    const data = await response.json()
+    dispatch(deleteSpotAction(spotId))
+  }
+}
 
-
-//reducer
-
-
-
+//reducer--------------------------------------------------------------------------------------------------------
 const initialstate = {allspots:{},single:{}}
 
 const spotsReducer = (state = initialstate, action)=> {
