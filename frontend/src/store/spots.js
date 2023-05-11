@@ -15,8 +15,10 @@ export const getAllSpotsAction = (spot) =>{
 };
 //------------------------------------------------------------------------------
 export const deleteSpotAction = (spotId) =>{
+  return{
   type:DELETE_SPOT,
   spotId
+}
 }
 //------------------------------------------------------------------------------
 export const getspot = (spotId) =>({
@@ -131,17 +133,22 @@ switch(action.type){
       return newState;
     }
 
+    case DELETE_SPOT:{
+      const newState = {...state,single:{...state.single},allspots:{...state.allspots}}
+      delete newState.allspots[action.spotId]
+      return newState
+    }
+
     case UPDATE_SPOT:{
       const newState = {...state, allspots:{...state.allspots}}
 
       // console.log('ACTION------before set' ,action)
-
       newState[action.spot.id] = action.spot
 
       // console.log('-----what is newState--------------', newState)
       newState.allspots[action.spot.id] = action.spot
-      // console.log('-----what is new State.all spots -----', newState.allspots[action.spot.id])
 
+      // console.log('-----what is new State.all spots -----', newState.allspots[action.spot.id])
       return newState
     }
 

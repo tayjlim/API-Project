@@ -1,16 +1,18 @@
 import {useModal} from '../../context/Modal'
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { deleteSpot } from '../../store/spots';
+import { useEffect } from 'react';
 
 function DeleteSpot ({spotId}) {
 
     const {closeModal} = useModal();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const yesDelete = (e) =>{
 
-        dispatch(deleteThunk(spotId))
+        dispatch(deleteSpot(spotId))
+        return closeModal();
+
     }
 
     const no = (e) =>{
@@ -19,23 +21,29 @@ function DeleteSpot ({spotId}) {
 
     }
 
+    useEffect(()=>{
+
+    })
+
     return (
-        <div>
+        <div className = 'deleteFormforSpot'>
+
             <h1>
             Confirm Delete
             </h1>
 
             <h3>
-            Are you Sure....
+            Are you Sure You Want To Remove?
             </h3>
 
-            <button>
-            YES
+            <button className = 'yesButton' onClick={yesDelete}>
+            YES (REMOVE)
             </button>
 
-            <button>
-                NO
+            <button className = 'noButton' onClick={no}>
+                NO (DONT REMOVE)
             </button>
+
         </div>
     )
 
