@@ -10,16 +10,17 @@ const dispatch = useDispatch();
 
 
 useEffect(()=>{
-
 dispatch(getSpot(spotId))
 },[dispatch,spotId])
 
-const spot = useSelector((state) => (state.spots.single.spot))
-
+// console.log('-------redirect-----------')
+const spot = useSelector((state) => (state.spots.single))
+// console.log('DOES THIS SPOT WORK?>' , spot)
 
 
 if(!spot)return null // need guard
 
+else
 return(
 
     <div>

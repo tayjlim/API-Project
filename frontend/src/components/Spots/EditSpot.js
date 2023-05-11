@@ -1,8 +1,7 @@
 import {useState} from 'react';
 import {useDispatch,useSelector} from 'react-redux'
 import {useEffect} from 'react'
-import {useHistory} from 'react-router-dom'
-import {useParams} from 'react-router-dom'
+import {useHistory,useParams} from 'react-router-dom'
 
 import {updateSpot,getSpot} from '../../store/spots';
 
@@ -11,20 +10,21 @@ function EditSpot () {
 
 
     const {spotId} = useParams();
-    const history = useHistory();
+
     const dispatch = useDispatch();
+    const history = useHistory();
 
-
-
-
-    const spots = useSelector((state) => (state.spots.allspots))
-    const spot = spots.spotId
-
+    const spot = useSelector((state)=> state.spots.allspots[spotId])
+    console.log('spot', spot)
 
 
     useEffect(()=>{
         dispatch(getSpot(spotId))
    },[dispatch,spotId])
+
+
+
+
 
     const [country, setCountry] = useState(spot?.country)
     const [address, setAddress] = useState(spot?.address)
@@ -75,6 +75,7 @@ function EditSpot () {
 
         if(Object.values(er).length >0)
         setErrors(er)
+
         else{
 
             await dispatch(updateSpot(spotId,updatedSpot))
@@ -84,7 +85,7 @@ function EditSpot () {
 
     }
 
-    if(!spot)return null // need guard to avoid chaining
+    if(!spot) return null // need guard to avoid chaining
 
     return(
         <div className ='editSpotDiv'>

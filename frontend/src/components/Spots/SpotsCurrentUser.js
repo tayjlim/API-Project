@@ -24,7 +24,7 @@ function SpotsCurrentUser () {
         currentUserSpots.push(spot)
     })
 
-    console.log('currentUserSpots', currentUserSpots)
+    // console.log('currentUserSpots', currentUserSpots)
 
     useEffect(() => {
         dispatch(getAllSpots())
