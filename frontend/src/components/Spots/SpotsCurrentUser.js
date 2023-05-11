@@ -11,7 +11,7 @@ function SpotsCurrentUser () {
     let history = useHistory();
     const Allspots = useSelector (state => Object.values(state.spots.allspots))
     const current = useSelector( state => state.session.user)
-    
+
     let currentUserSpots = [];
 
     const newSpotButton = () =>{
@@ -24,7 +24,7 @@ function SpotsCurrentUser () {
         if(spot.ownerId === current.id)
         currentUserSpots.push(spot)
     })
-
+    
     // console.log('currentUserSpots', currentUserSpots)
 
     useEffect(() => {

@@ -11,6 +11,7 @@ const dispatch = useDispatch();
 
 useEffect(()=>{
 dispatch(getSpot(spotId))
+
 },[dispatch,spotId])
 
 // console.log('-------redirect-----------')
