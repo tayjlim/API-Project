@@ -14,6 +14,11 @@ export const getAllSpotsAction = (spot) =>{
   }
 };
 
+export const deleteSpotAction = (spotId) =>{
+  type:DELETE_SPOT,
+  spotId
+}
+
 export const getspot = (spotId) =>({
   type: GET_SINGLE_SPOT,
 payload:spotId
@@ -35,7 +40,7 @@ export const getSpot = (spotId) => async (dispatch)=>{
     return spot
   }else{}
 }
-
+//get all
 export const getAllSpots = () => async(dispatch) => {
     const response = await csrfFetch('/api/spots');
 
@@ -46,7 +51,7 @@ export const getAllSpots = () => async(dispatch) => {
 
     } else{}
   }
-
+//create
 export const createSpot = (spot) => async (dispatch) =>{
   const response = await csrfFetch('/api/spots',{
     method: 'POST',
@@ -130,7 +135,7 @@ switch(action.type){
       // console.log('-----what is newState--------------', newState)
       newState.allspots[action.spot.id] = action.spot
       // console.log('-----what is new State.all spots -----', newState.allspots[action.spot.id])
-      
+
       return newState
     }
 

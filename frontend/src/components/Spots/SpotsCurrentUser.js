@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { getAllSpots } from "../../store/spots";
 import { useHistory } from "react-router-dom";
 import SpotItem from "./SpotItem";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteSpot from '../DeleteModal/DeleteSpot.js'
 
 function SpotsCurrentUser () {
     const dispatch = useDispatch();
@@ -10,8 +12,6 @@ function SpotsCurrentUser () {
     const Allspots = useSelector (state => Object.values(state.spots.allspots))
     const current = useSelector( state => state.session.user)
     let currentUserSpots = [];
-    // console.log(current)
-    // console.log(Allspots)
 
     const newSpotButton = () =>{
         return history.push('/spots/new')
@@ -37,10 +37,17 @@ function SpotsCurrentUser () {
             <div className = 'allContainer'>
             {currentUserSpots.map(spot=>
                 <div className = 'currentUserBox'>
-                <SpotItem spot={spot}/>
+                 <SpotItem spot={spot}/>
                     <div className = 'buttonDiv'>
                     <button className = 'updateButton' onClick ={()=>history.push(`/spots/${spot.id}/edit`)}>Update</button>
-                    <button className = 'deleteButton'>Delete</button>
+
+                    <button className = 'deleteButton'>
+                        <OpenModalMenuItem
+                        itemText = {'Delete'}
+                        className = 'deleteButton'
+                        modelComponent = {<DeleteSpot spotId = {spot.id}></DeleteSpot>}
+                        />
+                    </button>
                     </div>
                 </div>
 
