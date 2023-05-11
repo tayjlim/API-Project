@@ -17,8 +17,8 @@ function EditSpot () {
 
 
 
-    const spots = useSelector((state) => (state.spots))
-    const spot = spots[spotId]
+    const spots = useSelector((state) => (state.spots.allspots))
+    const spot = spots.spotId
 
 
 

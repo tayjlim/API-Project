@@ -7,7 +7,7 @@ import SpotItem from "./SpotItem";
 function SpotsCurrentUser () {
     const dispatch = useDispatch();
     let history = useHistory();
-    const Allspots = useSelector (state => Object.values(state.spots))
+    const Allspots = useSelector (state => Object.values(state.spots.allspots))
     const current = useSelector( state => state.session.user)
     let currentUserSpots = [];
     // console.log(current)

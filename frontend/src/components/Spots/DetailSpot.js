@@ -1,20 +1,23 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import { getSpot } from "../../store/spots";
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const DetailSpot = () =>{
+
 const {spotId} = useParams();
 const dispatch = useDispatch();
 
 
-
-
 useEffect(()=>{
+
 dispatch(getSpot(spotId))
 },[dispatch,spotId])
 
-const spot = useSelector((state) => state.spots.single.spot)
+const spot = useSelector((state) => (state.spots.single.spot))
+
+
+
 if(!spot)return null // need guard
 
 return(

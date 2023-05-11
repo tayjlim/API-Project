@@ -12,20 +12,21 @@ export const getallspots = (spots) => ({
     spots // spots
   });
 
-export const getspot = (spot) =>({
+export const getspot = (spotId) =>({
   type: GET_SINGLE_SPOT,
-  spot
+  payload: spotId
 })
 
 export const updatespot = (spot) => ({
 type: UPDATE_SPOT,
-spot
+payload:spot
 })
 
 
 //Thunk Action creators
 export const getSpot = (spotId) => async (dispatch)=>{
   const response = await csrfFetch(`/api/spots/${spotId}`);
+
   if(response.ok){
     const spot = await response.json();
     await dispatch(getspot(spot))
@@ -101,20 +102,20 @@ switch(action.type){
 
     case GET_ALL_SPOTS:{
       const newState = {...state,allspots:{}}
-        action.spots.Spots.forEach((spot) => (newState[spot.id]=spot))
+        action.spots.Spots.forEach(spot => newState.allspots[spot.id]=spot)
         return newState;
     }
 
     case GET_SINGLE_SPOT:{
       const newState = {...state,single:{}};
-      spot.single = action.spot
+      newState.single = action.payload
       return newState;
     }
 
     case UPDATE_SPOT:{
-      const spot = {...state,single:{},update:{}};
-      spot.single = action.spot
-      return spot
+      const newState = {...state,single:{},update:{}};
+      newState.single = action.payload
+      return newState
     }
 
 
