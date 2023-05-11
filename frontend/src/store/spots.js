@@ -3,22 +3,32 @@ import { csrfFetch } from "./csrf";
 //store as variable
 const GET_ALL_SPOTS = 'spots/GET_ALL_SPOTS'
 const GET_SINGLE_SPOT = 'spots/GET_SINGLE_SPOT'
+const UPDATE_SPOT = 'spots/UPDATE_SPOT'
+const DELETE_SPOT = 'spots/DELETE_SPOT'
 
 //action creators
-export const getallspots = (spots) => ({
+export const getAllSpotsAction = (spot) =>{
+  return{
     type: GET_ALL_SPOTS,
-    payload: spots // spots
-  });
+    spot // spots
+  }
+};
 
-export const getspot = (spot) =>({
+export const getspot = (spotId) =>({
   type: GET_SINGLE_SPOT,
-  payload: spot
+payload:spotId
+})
+
+export const updatespot = (spot) => ({
+type: UPDATE_SPOT,
+spot
 })
 
 
 //Thunk Action creators
 export const getSpot = (spotId) => async (dispatch)=>{
   const response = await csrfFetch(`/api/spots/${spotId}`);
+
   if(response.ok){
     const spot = await response.json();
     await dispatch(getspot(spot))
@@ -30,9 +40,10 @@ export const getAllSpots = () => async(dispatch) => {
     const response = await csrfFetch('/api/spots');
 
     if(response.ok) {
-      const spots = await response.json();
-      await dispatch(getallspots(spots));
-      return spots;
+      const data = await response.json();
+      dispatch(getAllSpotsAction(data));
+
+
     } else{}
   }
 
@@ -45,18 +56,29 @@ export const createSpot = (spot) => async (dispatch) =>{
     body: JSON.stringify(spot),
   })
   if(response.ok){
+
   const data = await response.json()
   return data
-  }
+    }
 }
 
-export const updateSpot = (spot) => async (dispatch) =>{
+export const updateSpot = (spotId,updatedSpot) => async (dispatch) =>{
+const response = await csrfFetch(`/api/spots/${spotId}`,{
+  method:'PUT',
+  headers:{
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(updatedSpot)
+})
+if(response.ok){
+  const data = await response.json()
+  await dispatch(updatespot(data))
+}
 
 
 }
 
 export const addImage = (spotId,imgs) => async (dispatch) =>{
-
   const response = await csrfFetch (`/api/spots/${spotId}/images`,{
     method:'POST',
     headers:{
@@ -69,32 +91,48 @@ export const addImage = (spotId,imgs) => async (dispatch) =>{
       return img;
 
     }
-
-
 }
 
 
 
 
 //reducer
-const initialstate = {allspot:{},single:{}}
+
+
+
+const initialstate = {allspots:{},single:{}}
 
 const spotsReducer = (state = initialstate, action)=> {
-
 switch(action.type){
 
     case GET_ALL_SPOTS:{
-        let spots = {...state,allspot:{...state.allspot}};
-        action.payload.Spots.forEach(spot => spots[spot.id]=spot)
-        return spots;
+
+      const newState = {...state,allspots:{}}
+        action.spot.Spots.forEach(spot => newState.allspots[spot.id]=spot)
+        return newState;
     }
 
     case GET_SINGLE_SPOT:{
-      const spot = {...state,single:{}};
-      spot.single = action.payload
-      return spot;
+      const newState = {...state,single:{}};
+
+      // console.log('-------action what is it ? -------', action.payload.spot)
+      newState.single = action.payload.spot
+      return newState;
     }
 
+    case UPDATE_SPOT:{
+      const newState = {...state, allspots:{...state.allspots}}
+
+      // console.log('ACTION------before set' ,action)
+
+      newState[action.spot.id] = action.spot
+
+      // console.log('-----what is newState--------------', newState)
+      newState.allspots[action.spot.id] = action.spot
+      // console.log('-----what is new State.all spots -----', newState.allspots[action.spot.id])
+      
+      return newState
+    }
 
     default:
         return state

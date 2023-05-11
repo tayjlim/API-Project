@@ -8,11 +8,13 @@ import './spots.css'
 const Spots = () => {
 
     const dispatch = useDispatch();
-    const spots = useSelector (state => Object.values(state.spots))
-    
+
     useEffect(() => {
         dispatch(getAllSpots())
     },[dispatch])
+
+    const spots = useSelector ((state) =>Object.values(state.spots.allspots))
+
 
     return (
         <div className = 'allContainer'>

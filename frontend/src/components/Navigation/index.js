@@ -20,9 +20,9 @@ function Navigation({ isLoaded }){
       </li>
 
       {isLoaded && (
-        <li id = 'loginsignupbutton'>
+
           <ProfileButton user={sessionUser} />
-        </li>
+
       )}
     </ul>
     </div>

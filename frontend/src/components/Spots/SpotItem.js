@@ -8,7 +8,9 @@ const SpotItem = ({spot}) => {
   const handleClick = () =>{
     history.push(`/spots/${spot.id}`)
   }
+    if(!spot)return null
 
+    else
     return(
      <div id = {spot.id} className = 'spotContainer'>
        <img onClick ={handleClick}className = 'spotImage'src = {spot.previewImage} alt = {spot.name}/>
