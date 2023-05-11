@@ -6,15 +6,17 @@ export const GET_REVIEWS = 'reviews/GET_REVIEWS'
 // action creators --------------------------------------------------
 
 //get reviews (ALL)
-export const getReviewAction = (reviews) =>{
+export const getReviewAction = (reviews) => {
+    return{
     type: GET_REVIEWS,
     reviews
+    }
 }
 
 // Thunks
 // dont need to be a user to get all reviews
-export const getReviews = (reviews) => async (dispatch) =>{
-    const response = await fetch(`/api/spots/${spotId}`)
+export const getReviews = (spotId) => async (dispatch) =>{
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`)
 
     if(response.ok){
         const reviews = await response.json();
@@ -25,21 +27,21 @@ export const getReviews = (reviews) => async (dispatch) =>{
 
 // REDUCERRR
 const initialtstate = {spot:{},user:{}}
-const reviewsReducer = (state=initialtstate,action) => {
-    
-let newState;
 
+const reviewsReducer = (state=initialtstate,action) => {
 switch(action.type){
 
     case GET_REVIEWS:{
-        newState = {...state,spot:{},user:{...state.user}}
-        action.reviews.Reviews.forEach((review)=>{
-            newState[review.id] = review
+        const newState = {...state,spot:{},user:{...state.user}}
+        console.log('WHAT IS ACTION',action.reviews)
+        action.reviews.reviews.forEach((review)=>{
+        newState.spot[review.id] = review
         })
         return newState
     }
 
-
+    default:
+        return state
 
  }
 }

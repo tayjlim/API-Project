@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { getSpot } from "../../store/spots";
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { getReviews } from "../../store/reviews";
 
 const DetailSpot = () =>{
 
@@ -11,13 +12,16 @@ const dispatch = useDispatch();
 
 useEffect(()=>{
 dispatch(getSpot(spotId))
-
+dispatch(getReviews(spotId))
 },[dispatch,spotId])
 
 // console.log('-------redirect-----------')
 const spot = useSelector((state) => (state.spots.single))
+const reviews = useSelector((state)=> (state.reviews.spot))
 
 console.log('DOES THIS SPOT WORK?>' , spot)
+console.log('DOES THIS reviews WORK?>' , reviews)
+
 
 
 if(!spot.SpotImages)return null // need guard
