@@ -14,12 +14,15 @@ const SpotItem = ({spot}) => {
     return(
      <div id = {spot.id} className = 'spotContainer'>
        <img onClick ={handleClick}className = 'spotImage'src = {spot.previewImage} alt = {spot.name}/>
-        <div className = 'citystatestars'>
+
+       <div className = 'citystatestars'>
           <p>{spot.city} , {spot.state}</p>
-          <div className="rating">
+
+            <div className="rating">
               <i className="fa-solid fa-star" />
               {" · "} {spot.avgRating ? Number(spot.avgRating).toFixed(2) : "New!"}
             </div>
+
         </div>
         <p className="price">${spot.price}</p>
 

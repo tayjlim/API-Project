@@ -126,7 +126,12 @@ return(
         <div className = 'createReviewTurnary'>
          {
         (user && user.id !== spot.Owner.id && canwriteReview(user,reviews)) ? (
-            <OpenModalButton></OpenModalButton>
+
+            <OpenModalButton
+            className = 'writeReviewButton'
+            modalComponent={ReviewModal}
+            buttonText = 'Write a Review'
+            />
           ) :
           (null)
         }
