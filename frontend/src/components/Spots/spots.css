@@ -55,6 +55,16 @@ max-height: 266px;
     width:500px;
 }
 
-.firstImage{
+.small{
     border-radius: 17px;
+    max-width : 250px;
+}
+.detailImageDiv{
+    display: flex;
+}
+
+.mainImage{
+    max-width: 600px;
+    border-radius: 17px;
+
 }

@@ -40,16 +40,32 @@ return(
         </div>
 
     <div className ='detailSpotContainer'>
+
+
         <div className = 'detailImageDiv'>
+
             <div clasName = 'leftpic'>
-            <img src = {spot.SpotImages[0].url}  className = 'firstImage'/>
+            <img  className = 'mainImage'src = {spot.SpotImages[0].url}  id = 'firstImage'/>
             </div>
 
             <div className = 'rightPictures'>
-                <img>
-                    
-                </img>
+
+                <div className = 'topPortion'>
+                    <img className = 'small'src = {spot.SpotImages[1].url}>
+                    </img>
+                    <img className = 'small' src = {spot.SpotImages[2].url}>
+                    </img>
+                </div>
+
+                <div className = 'bottomPortion'>
+                    <img  className = 'small' src = {spot.SpotImages[3].url}>
+                    </img>
+                    <img  className = 'small' src = {spot.SpotImages[4].url}>
+                    </img>
+                </div>
+
             </div>
+
         </div>
 
         <div className = 'hostAndReviews'>
