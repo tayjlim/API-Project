@@ -3,7 +3,7 @@ import { getSpot } from "../../store/spots";
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getReviews } from "../../store/reviews";
-
+import ReviewsForSpot from "../Reviews";
 const DetailSpot = () =>{
 
 const {spotId} = useParams();
