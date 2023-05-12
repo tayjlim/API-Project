@@ -4,6 +4,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getReviews } from "../../store/reviews";
 import ReviewsForSpot from "../Reviews";
+
 const DetailSpot = () =>{
 
 const {spotId} = useParams();
@@ -72,7 +73,7 @@ return(
         <div className = 'reviewsDivDetailBottom'>
 
         <div className = 'starnumreviewsDiv'>
-            <p className = 'starNumreviews'>
+            <p className = 'starNumreviewsbottom'>
         <i className="fa-solid fa-star" />
         {Number(spot.avgStarRating)? " " + Number(spot.avgStarRating).toFixed(2): 'New'}
         {Number(spot.numReviews) === 1
@@ -81,6 +82,9 @@ return(
             ? null
             : ` · ${spot.numReviews} reviews`}
             </p>
+
+            <button className = 'createAReview'>Create Review</button>
+
         </div>
 
         <div className = 'reviewLoopdiv'>

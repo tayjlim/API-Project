@@ -50,6 +50,11 @@ max-height: 266px;
     flex-direction:column;
     align-items: center;
 }
+
 .starNumReviews{
     width:500px;
+}
+
+.firstImage{
+    border-radius: 17px;
 }
