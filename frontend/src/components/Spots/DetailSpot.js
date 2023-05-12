@@ -41,7 +41,15 @@ return(
 
     <div className ='detailSpotContainer'>
         <div className = 'detailImageDiv'>
+            <div clasName = 'leftpic'>
             <img src = {spot.SpotImages[0].url}  className = 'firstImage'/>
+            </div>
+
+            <div className = 'rightPictures'>
+                <img>
+                    
+                </img>
+            </div>
         </div>
 
         <div className = 'hostAndReviews'>

@@ -12,27 +12,27 @@ module.exports = {
       {
         spotId: 1,
         userId: 1,
-        review: 'Ghetto',
+        review: 'A wild experience!',
         stars: 3,
-      },
-      {
+        },
+        {
         spotId: 2,
         userId: 1,
-        review: 'sauce it up bluhd',
+        review: 'Saucy like a Charizard!',
         stars: 4,
-      },
-      {
+        },
+        {
         spotId: 3,
         userId: 1,
-        review: 'swaggg',
+        review: 'Absolutely swaggy Pikachu!',
         stars: 5,
-      },
-      {
+        },
+        {
         spotId: 4,
         userId: 1,
-        review: 'weoweo',
+        review: 'Could use more Eevee-evolutions',
         stars: 2,
-      }
+        }
     ])
   },
 
