@@ -3,27 +3,28 @@ import { useEffect } from "react";
 import { getAllSpots } from "../../store/spots";
 import { useHistory } from "react-router-dom";
 import SpotItem from "./SpotItem";
+import OpenModalButton from "../OpenModalButton/index";
+import DeleteSpot from '../DeleteModal/DeleteSpot.js'
 
 function SpotsCurrentUser () {
     const dispatch = useDispatch();
     let history = useHistory();
     const Allspots = useSelector (state => Object.values(state.spots.allspots))
     const current = useSelector( state => state.session.user)
+
     let currentUserSpots = [];
-    // console.log(current)
-    // console.log(Allspots)
 
     const newSpotButton = () =>{
         return history.push('/spots/new')
     }
 
-
+    let closeMenu;
 
     Allspots.forEach((spot)=>{
         if(spot.ownerId === current.id)
         currentUserSpots.push(spot)
     })
-
+    
     // console.log('currentUserSpots', currentUserSpots)
 
     useEffect(() => {
@@ -37,10 +38,20 @@ function SpotsCurrentUser () {
             <div className = 'allContainer'>
             {currentUserSpots.map(spot=>
                 <div className = 'currentUserBox'>
-                <SpotItem spot={spot}/>
+                    <SpotItem spot={spot}/>
+
                     <div className = 'buttonDiv'>
-                    <button className = 'updateButton' onClick ={()=>history.push(`/spots/${spot.id}/edit`)}>Update</button>
-                    <button className = 'deleteButton'>Delete</button>
+                        <button className = 'updateButton' onClick ={()=>history.push(`/spots/${spot.id}/edit`)}>
+                            Update
+                        </button>
+                        <OpenModalButton
+                            className = 'deleteButton'
+                            buttonText ='DELETE'
+                            onButtonClick = {closeMenu}
+                            modalComponent={<DeleteSpot spotId = {spot.id}/>}
+                        />
+
+
                     </div>
                 </div>
 
