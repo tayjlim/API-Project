@@ -16,7 +16,7 @@ module.exports = {
       ownerId: 1,
       address: 'Pallet Town',
       city: 'Kanto',
-      state: 'Kanto',
+      state: 'Poke',
       country: 'Japan',
       lat: 35.05,
       lng: 135.78,
@@ -25,10 +25,10 @@ module.exports = {
       price: 100.00
     },
     {
-      ownerId: 2,
+      ownerId: 1,
       address: '123 Victory Road',
       city: 'Indigo Plateau',
-      state: 'Kanto',
+      state: 'Poke',
       country: 'Japan',
       lat: 35.6,
       lng: 139.6,
@@ -37,10 +37,10 @@ module.exports = {
       price: 500.00
     },
     {
-      ownerId: 3,
+      ownerId: 1,
       address: '456 Ecruteak City',
       city: 'Johto',
-      state: 'Johto',
+      state: 'Poke',
       country: 'Japan',
       lat: 36.41,
       lng: 138.25,
@@ -49,10 +49,10 @@ module.exports = {
       price: 1000.00
     },
     {
-      ownerId: 4,
+      ownerId: 1,
       address: '789 Sootopolis City',
       city: 'Hoenn',
-      state: 'Hoenn',
+      state: 'Poke',
       country: 'Japan',
       lat: 33.93,
       lng: 131.97,

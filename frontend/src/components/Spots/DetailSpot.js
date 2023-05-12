@@ -4,11 +4,16 @@ import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getReviews } from "../../store/reviews";
 import ReviewsForSpot from "../Reviews";
+import OpenModalButton from '../OpenModalButton'
+import ReviewModal from "../ReviewModal/ReviewModal";
 
-const DetailSpot = () =>{
+const DetailSpot = () =>
+{
+
 
 const {spotId} = useParams();
 const dispatch = useDispatch();
+
 
 
 useEffect(()=>{
@@ -17,21 +22,31 @@ dispatch(getReviews(spotId))
 },[dispatch,spotId])
 
 // console.log('-------redirect-----------')
+
 const spot = useSelector((state) => (state.spots.single))
 const reviews = useSelector((state)=> (Object.values(state.reviews.spot)))
+const user = useSelector((state) => state.session.user)
+
+function canwriteReview (user ,reviews){
+
+    if(user && reviews){
+    const truths = reviews.find(review => review.userId === user.id)
+    return !truths
+    }
+}
 
 // console.log('DOES THIS SPOT WORK?>' , spot)
-console.log('DOES THIS reviews WORK?>' , reviews)
+// console.log('DOES THIS reviews WORK?>' , reviews)
+// console.log('DOES THIS reviews USER?>', user)
+// console.log('DOES THIS WORK' ,canwriteReview(user,reviews))
 
 
 
 
 
-if(!spot.SpotImages)return null // need guard
+if(!spot.SpotImages) return null
 
-else
 return(
-
 <div className = 'detailSpotdiv'>
 
         <div className ='topHeaders'>
@@ -106,20 +121,40 @@ return(
             ? null
             : ` · ${spot.numReviews} reviews`}
             </p>
+        </div>
 
-            <button className = 'createAReview'>Create Review</button>
+        <div className = 'createReviewTurnary'>
+         {
+        (user && user.id !== spot.Owner.id && canwriteReview(user,reviews)) ? (
+            <OpenModalButton></OpenModalButton>
+          ) :
+          (null)
+        }
 
         </div>
 
-        <div className = 'reviewLoopdiv'>
+        <div className = 'reviewTurnary'>
+
+        {!reviews.length && user.id !== spot.Owner.id ?
+        (<div>
+                <h2>Be the First to Review!</h2>
+         </div>
+        ) :
+        (
+            <div className = 'reviewLoopdiv'>
             {reviews.map(review=><ReviewsForSpot review = {review}/>)}
         </div>
+        )}
+        </div>
+
+
 
         </div>
 
         </div>
 
-</div>
+    </div>
     )
-}
+        }
+
 export default DetailSpot;

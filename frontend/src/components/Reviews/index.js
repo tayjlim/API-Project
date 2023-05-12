@@ -15,8 +15,6 @@ const ReviewsForSpot = ({review}) =>{
         '12': 'December'
     }
 const date = review.createdAt.split('-')[1]
-
-console.log('what is date' ,typeof date)
     return(
         <div className = 'firstandlastname'>
 
@@ -32,7 +30,7 @@ console.log('what is date' ,typeof date)
                 {review.review}
             </p>
 
-            
+
 
         </div>
 
