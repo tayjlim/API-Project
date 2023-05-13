@@ -211,7 +211,6 @@ router.post('/:spotId/reviews',[requireAuth,validateReview], async(req,res)=>{
 
   //valid things go down here
   if(user){
-    console.log('reach here')
     const newReview = await Review.create({userId: user.id, spotId: req.params.spotId,...req.body})
     return res.status(201).json(newReview)// send response!
   }

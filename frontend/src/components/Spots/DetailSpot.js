@@ -17,18 +17,20 @@ const dispatch = useDispatch();
 
 
 useEffect(()=>{
+
 dispatch(getSpot(spotId))
 dispatch(getReviews(spotId))
+
 },[dispatch,spotId])
 
 // console.log('-------redirect-----------')
 
 const spot = useSelector((state) => (state.spots.single))
-const reviews = useSelector((state)=> (Object.values(state.reviews.spot)))
+const reviewsObj = useSelector((state)=> (state.reviews.spot))
+const reviews = Object.values(reviewsObj)
 const user = useSelector((state) => state.session.user)
 
 function canwriteReview (user ,reviews){
-
     if(user && reviews){
     const truths = reviews.find(review => review.userId === user.id)
     return !truths
@@ -39,9 +41,6 @@ function canwriteReview (user ,reviews){
 // console.log('DOES THIS reviews WORK?>' , reviews)
 // console.log('DOES THIS reviews USER?>', user)
 // console.log('DOES THIS WORK' ,canwriteReview(user,reviews))
-
-
-
 
 
 if(!spot.SpotImages) return null
@@ -59,7 +58,7 @@ return(
 
         <div className = 'detailImageDiv'>
 
-            <div clasName = 'leftpic'>
+            <div className = 'leftpic'>
             <img  className = 'mainImage'src = {spot.SpotImages[0].url}  id = 'firstImage'/>
             </div>
 
@@ -123,17 +122,18 @@ return(
             </p>
         </div>
 
-        <div className = 'createReviewTurnary'>
+        <div className = 'createReviewTernary'>
          {
         (user && user.id !== spot.Owner.id && canwriteReview(user,reviews)) ? (
 
-            <OpenModalButton
+                    <OpenModalButton
             className = 'writeReviewButton'
-            modalComponent={ReviewModal}
+            modalComponent={<ReviewModal spotId = {spotId} user={user}/>}
             buttonText = 'Write a Review'
             />
+
           ) :
-          (null)
+          <div></div>
         }
 
         </div>
@@ -156,10 +156,10 @@ return(
 
         </div>
 
-        </div>
+    </div>
 
     </div>
     )
-        }
+}
 
 export default DetailSpot;

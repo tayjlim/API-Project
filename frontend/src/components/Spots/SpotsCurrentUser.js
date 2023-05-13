@@ -24,7 +24,7 @@ function SpotsCurrentUser () {
         if(spot.ownerId === current.id)
         currentUserSpots.push(spot)
     })
-    
+
     // console.log('currentUserSpots', currentUserSpots)
 
     useEffect(() => {
@@ -46,9 +46,10 @@ function SpotsCurrentUser () {
                         </button>
                         <OpenModalButton
                             className = 'deleteButton'
-                            buttonText ='DELETE'
+                            buttonText ='delete'
                             onButtonClick = {closeMenu}
                             modalComponent={<DeleteSpot spotId = {spot.id}/>}
+                            
                         />
 
 
