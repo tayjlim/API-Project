@@ -1,13 +1,14 @@
 /* TODO Add site wide styles */
 body,textarea,input {
   font-family: "Poppins", sans-serif;
+
 }
 
 .topHeaders,.price{
   font-family: 'Pokemon Solid', sans-serif;
 }
 
-h2,h1{
+h2,h1,h3{
   font-family: 'Pokemon Solid', sans-serif;
 }
 
@@ -15,4 +16,35 @@ h2,h1{
   color:red;
   margin:4px;
   font-size:smaller
+}
+
+body{
+  margin:0;
+}
+
+.imgsmall{
+  margin: 4px;;
+}
+.twoButtonsDiv{
+  display:flex;
+}
+.yesDeleteReview,.noDonotDelete{
+  font-family: 'Pokemon Solid', sans-serif;
+  width: 20%;
+  height: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: #ff0;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.yesNobuttonDiv{
+  display:flex;
+  justify-content: space-around;
 }

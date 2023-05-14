@@ -55,9 +55,9 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && (
-          <p>{errors.credential}</p>
+          <p className = 'loginError'>{errors.credential}</p>
         )}
-        <button type="submit" className = 'login-button'>Log In </button>
+        <button type="submit" className = 'login-button' disabled={password.length<6 ||credential.length<4}>Log In </button>
         <button id = 'demoUser' onClick = {(e) => signin(e)}>
         DEMO USER
     </button>

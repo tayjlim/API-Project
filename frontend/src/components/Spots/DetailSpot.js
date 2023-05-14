@@ -2,11 +2,12 @@ import { useParams } from "react-router-dom";
 import { getSpot } from "../../store/spots";
 import { useSelector,useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getReviews } from "../../store/reviews";
+import { getAllReviewsBySpotIdThunk } from "../../store/reviews";
 import ReviewsForSpot from "../Reviews";
 import OpenModalButton from '../OpenModalButton'
 import ReviewModal from "../ReviewModal/ReviewModal";
-
+import { useModal } from "../../context/Modal";
+import './DetailSpot.css'
 const DetailSpot = () =>
 {
 
@@ -14,34 +15,50 @@ const DetailSpot = () =>
 const {spotId} = useParams();
 const dispatch = useDispatch();
 
+const {closeModal} = useModal();
 
+
+
+
+const reviewsObj = useSelector((state)=> (state.reviews.spot))
+const spot = useSelector((state) => (state.spots.single))
+const user = useSelector((state) => state.session.user)
+const reviews = Object.values(reviewsObj)
 
 useEffect(()=>{
+    dispatch(getSpot(spotId))
+    dispatch(getAllReviewsBySpotIdThunk(spotId))
+    closeModal();
+    },[dispatch,spotId,reviews.length])
 
-dispatch(getSpot(spotId))
-dispatch(getReviews(spotId))
 
-},[dispatch,spotId])
+    console.log('copy this user obj',user)
+    //make a proxy demo
+    let test = {
+        id: 999999,
+        email: 'coo.gmail.com',
+        lastName:'testtesttest',
 
-// console.log('-------redirect-----------')
+    }
 
-const spot = useSelector((state) => (state.spots.single))
-const reviewsObj = useSelector((state)=> (state.reviews.spot))
-const reviews = Object.values(reviewsObj)
-const user = useSelector((state) => state.session.user)
+//  if(!test.id){
+
+//  }
 
 function canwriteReview (user ,reviews){
     if(user && reviews){
     const truths = reviews.find(review => review.userId === user.id)
-    return !truths
-    }
+    return !truths}
 }
-
+const bookingClick = () =>{
+    return alert('Feature coming soon!')
+}
 // console.log('DOES THIS SPOT WORK?>' , spot)
 // console.log('DOES THIS reviews WORK?>' , reviews)
 // console.log('DOES THIS reviews USER?>', user)
 // console.log('DOES THIS WORK' ,canwriteReview(user,reviews))
 
+// console.log('have user show ',user)
 
 if(!spot.SpotImages) return null
 
@@ -65,17 +82,18 @@ return(
             <div className = 'rightPictures'>
 
                 <div className = 'topPortion'>
-                    <img className = 'small'src = {spot.SpotImages[1].url}>
-                    </img>
-                    <img className = 'small' src = {spot.SpotImages[2].url}>
-                    </img>
+                  {spot.SpotImages[1]?( <img className = 'small'src = {spot.SpotImages[1].url}>
+                    </img>) : null}
+
+                    {spot.SpotImages[2]?( <img className = 'small'src = {spot.SpotImages[2].url}>
+                    </img>) : null}
                 </div>
 
                 <div className = 'bottomPortion'>
-                    <img  className = 'small' src = {spot.SpotImages[3].url}>
-                    </img>
-                    <img  className = 'small' src = {spot.SpotImages[4].url}>
-                    </img>
+                {spot.SpotImages[3]?( <img className = 'small'src = {spot.SpotImages[3].url}>
+                    </img>) : null}
+                    {spot.SpotImages[4]?( <img className = 'small'src = {spot.SpotImages[4].url}>
+                    </img>) : null}
                 </div>
 
             </div>
@@ -92,6 +110,7 @@ return(
             </div>
 
         <div className = 'reserveContainer'>
+            <div className = 'nightReviewDiv'>
             <p className = 'priceP'>
                 ${spot.price} Night
             </p>
@@ -105,7 +124,11 @@ return(
                     ? null
                     : ` · ${spot.numReviews} reviews`}
             </p>
+
             </div>
+            <button className = 'reserveNowButton' onClick={bookingClick}>Reserve Now</button>
+            </div>
+
         </div>
 
         <div className = 'reviewsDivDetailBottom'>
@@ -124,33 +147,38 @@ return(
 
         <div className = 'createReviewTernary'>
          {
-        (user && user.id !== spot.Owner.id && canwriteReview(user,reviews)) ? (
-
-                    <OpenModalButton
+        (!user ? null : (user && user.id !== spot.Owner.id) && canwriteReview (user ,reviews)) ? (
+            <OpenModalButton
             className = 'writeReviewButton'
             modalComponent={<ReviewModal spotId = {spotId} user={user}/>}
-            buttonText = 'Write a Review'
+            buttonText = 'Post Your Review'
             />
 
-          ) :
-          <div></div>
+          ) : null
+
         }
 
         </div>
 
         <div className = 'reviewTurnary'>
 
-        {!reviews.length && user.id !== spot.Owner.id ?
-        (<div>
-                <h2>Be the First to Review!</h2>
-         </div>
-        ) :
+        {(!!reviews.length ) ?
         (
             <div className = 'reviewLoopdiv'>
-            {reviews.map(review=><ReviewsForSpot review = {review}/>)}
-        </div>
+            {reviews.map(review=><ReviewsForSpot review={review} user = {user}/>)}
+            </div>
+        ) :
+
+        (
+
+            <div>
+        <h2>Be the First to Review!</h2>
+            </div>
+
         )}
         </div>
+
+
 
 
 
@@ -163,3 +191,6 @@ return(
 }
 
 export default DetailSpot;
+        <div>
+                <h2>Be the First to Review!</h2>
+         </div>

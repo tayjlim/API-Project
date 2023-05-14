@@ -5,8 +5,10 @@ import { useHistory } from "react-router-dom";
 import SpotItem from "./SpotItem";
 import OpenModalButton from "../OpenModalButton/index";
 import DeleteSpot from '../DeleteModal/DeleteSpot.js'
+import './SpotsCurrentUser.css'
 
 function SpotsCurrentUser () {
+
     const dispatch = useDispatch();
     let history = useHistory();
     const Allspots = useSelector (state => Object.values(state.spots.allspots))
@@ -34,28 +36,15 @@ function SpotsCurrentUser () {
     return (
         <div>
         <h1>Manage Your Spots</h1>
-        <button onClick = {newSpotButton}> Create a New Spot</button>
+        <div>
+        {currentUserSpots.length ===0 ? (<button id = "createSpotCurrent" onClick = {newSpotButton}> Create a New Spot</button>) : (null)
+
+        }
+
+        </div>
             <div className = 'allContainer'>
             {currentUserSpots.map(spot=>
-                <div className = 'currentUserBox'>
-                    <SpotItem spot={spot}/>
-
-                    <div className = 'buttonDiv'>
-                        <button className = 'updateButton' onClick ={()=>history.push(`/spots/${spot.id}/edit`)}>
-                            Update
-                        </button>
-                        <OpenModalButton
-                            className = 'deleteButton'
-                            buttonText ='delete'
-                            onButtonClick = {closeMenu}
-                            modalComponent={<DeleteSpot spotId = {spot.id}/>}
-                            
-                        />
-
-
-                    </div>
-                </div>
-
+                <SpotItem spot={spot} current={true}/>
             )}
 
             </div>

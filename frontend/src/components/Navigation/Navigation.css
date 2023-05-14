@@ -3,25 +3,33 @@
 }
 
 #homebttn{
-
 border-radius: 2px;
 align-items: center;
 justify-content: center;
 }
 
 #navigation{
+    width:100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     border-bottom: solid;
     margin-bottom: 0;
+    background-color: #f51111;
+    margin:0px;
+    padding:0px;
 }
+
 li{
     display:flex;
     align-items: center;
     justify-content: center;
 }
-
+.userMenu{
+    display:flex;
+    width: 300px;
+    justify-content: space-around;
+}
 .fas{
     margin-bottom: 20px;
     justify-content: center;
@@ -32,3 +40,19 @@ ul {
     list-style-type: none;
     padding: 5px;
   }
+.Link{
+    margin:0px;
+    color:#ff0;
+    text-decoration:none;
+    font-size: 25px;
+}
+.active,a{
+    text-decoration:none
+}
+.active> h1{
+    font-size: 45px;
+}
+.createDiv{
+    display:flex;
+    align-items: center;
+}

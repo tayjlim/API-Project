@@ -14,7 +14,7 @@ function Navigation({ isLoaded }){
 
       <li>
         <NavLink exact to="/">
-          <h1>PokeBnB</h1>
+          <h1 className = 'Link'>PokeBnB</h1>
         </NavLink>
 
       </li>

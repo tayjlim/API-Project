@@ -2,6 +2,7 @@ import { useState,useEffect } from "react"
 import { useModal } from "../../context/Modal"
 import { useDispatch} from "react-redux"
 import { createReview } from "../../store/reviews"
+import {getSpot} from '../../store/spots'
 import "./CreateReviewModal.css"
 
 const ReviewModal = ({user,spotId}) =>{
@@ -11,7 +12,7 @@ const ReviewModal = ({user,spotId}) =>{
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch()
     const { closeModal } = useModal()
-
+    console.log('user is this ', user)
 
 let starArr = [1,2,3,4,5]
 
@@ -21,40 +22,34 @@ useEffect(()=>{
     const errors = {}
         if(writeReview.length <5)
         errors.writeReview = 'Please write more....'
-
-
     setErrors(errors)
 
 },[writeReview])
 
-const reviewSubmit = (e) => {
+const reviewSubmit = async (e) => {
     e.preventDefault()
-    const review = {
+    const payload = {
+        id:spotId,
         review: writeReview,
-        stars,
-
+        stars
     }
-    console.log('---insidebutton-----',review)
-    return dispatch(createReview(spotId,review).then(closeModal))
 
-    //set errors?
-//     if (writeReview.length === 0 ){
-//     errors.writeReview = 'Not enough charecters'
-//    }
-
-
+  let newReview = await dispatch(createReview(payload,user))
+   if (newReview) {
+    dispatch(getSpot(spotId)).then(() => closeModal())
+}
 }
 
 
-console.log('------------------------------------------------------------------')
-console.log('DOES THIS reviews USER ID #??>', user.id)
-console.log('DOES THIS TYPE  spotId?>', typeof spotId,  'string???')
-console.log('------------------------------------------------------------------')
+// console.log('------------------------------------------------------------------')
+// console.log('DOES THIS reviews USER ID #??>', user.id)
+// console.log('DOES THIS TYPE  spotId?>', typeof spotId,  'string???')
+// console.log('------------------------------------------------------------------')
 
 return(
     <div>
 
-    <form onSubmit={(e)=>{reviewSubmit(e)}}>
+    <form onSubmit={(e)=>reviewSubmit(e)}>
 
     <h2>
     How was your stay?
@@ -91,7 +86,7 @@ return(
 
 
     <div className= 'submitButtonReviewDiv'>
-    <button className = "submitButtonReview ">Submit your review</button>
+    <button className = "submitButtonReview " disabled={writeReview.length<10}>Submit your review</button>
     </div>
 
     </form>
