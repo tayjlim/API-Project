@@ -36,13 +36,15 @@ function DeleteSpot ({spotId}) {
             Are you Sure You Want To Remove?
             </h3>
 
-            <button className = 'yesButton' onClick={yesDelete}>
-            YES (REMOVE)
-            </button>
 
-            <button className = 'noButton' onClick={no}>
-                NO (DONT REMOVE)
-            </button>
+                <button className = 'yesButton' onClick={yesDelete}>
+                YES (REMOVE)
+                </button>
+
+                <button className = 'noButton' onClick={no}>
+                    NO (DONT REMOVE)
+                </button>
+           
 
         </div>
     )

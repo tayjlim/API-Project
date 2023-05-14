@@ -11,9 +11,17 @@
     margin: 10px;
     display:flex;
     flex-direction: column;
-    max-width: 400px;
-    margin:0%;
+    width:100%;
+    max-width:20%;
+    height: 20%;
     margin-top:25px;
+    border-style:groove;
+    border-radius: 15px;
+    padding:4px;
+}
+.spotContainer>p{
+    margin-top:5px;
+    color:black
 }
 .spotImage{
 width:100%;
@@ -21,40 +29,84 @@ border-radius: 15px;
 max-height: 266px;
 }
 .citystatestars{
-    padding-left: 16px;
+    padding-left: 12px;
 }
 .price{
-    padding-left:16px;
+    padding-left:12px;
     margin-top:9px;
 }
 
 .reserveContainer{
     display:flex;
     justify-content: center;
-    width:200px;
+    flex-direction: column;
+    align-items: center;
+    width:35%;
     border-style: groove;
+    border-radius: 15px;
 }
 
 .hostAndReviews{
     display:flex;
     border-bottom: solid;
+    justify-content:space-between;
+    width:81%;
 
 }
 .detailSpotContainer{
-    width:  70%;
-    display:flex;
+    width: 80%;
+    display:inline-flex;
     flex-direction: column;
+    justify-content: center;
 }
 .detailSpotdiv{
+    width:90%;
     display:flex;
     flex-direction:column;
     align-items: center;
+
 }
 
 .starNumReviews{
     width:500px;
 }
 
-.firstImage{
+.small{
     border-radius: 17px;
+    max-width : 250px;
+    margin:5px;
 }
+.detailImageDiv{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+}
+.leftpic{
+    width: 45%;
+}
+.rightPictures{
+    width:45%;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-around;
+    align-items: flex-end;
+  }
+  .topPortion,.bottomPortion{
+    width:100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .small{
+    width:50%;
+  }
+
+.mainImage{
+    border-radius: 17px;
+    width:100%
+}
+
+.citystatestars > p {
+margin-top: 5px;
+}
+

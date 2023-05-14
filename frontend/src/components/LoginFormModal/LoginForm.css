@@ -1,5 +1,5 @@
 .login-button {
-    width: 100%;
+    width: 70%;
     height: 2.5em;
     display: flex;
     justify-content: center;
@@ -16,4 +16,22 @@
     background-color: white;
     color: lightgrey;
     border: 1px solid lightgrey;
+}
+
+.loginError{
+    color:red;
+}
+
+#demoUser{
+    width: 70%;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px 0;
 }
