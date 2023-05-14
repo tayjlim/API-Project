@@ -1,0 +1,27 @@
+.empty {
+    color: rgb(253, 202, 210);
+}
+
+.filled {
+    color: #f2f0f3;
+}
+
+.ratingDiv{
+    display:flex;
+    justify-content: space-evenly;
+}
+
+span{
+    display:flex;
+    justify-content: center;
+    font-size: small;
+
+}
+.submitButtonReviewDiv{
+    display:flex;
+    justify-content: center;
+
+}
+.submitButtonReview{
+    border-radius: 15px;
+}

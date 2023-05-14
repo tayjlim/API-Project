@@ -1,0 +1,47 @@
+
+.createForm{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+}
+
+.descriptionDiv{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.cityDiv >label{
+ margin:8px
+}
+
+.oak{
+width:30%
+}
+#createSpot{
+    display:flex;
+    justify-content: space-evenly;
+
+}
+.descriptionDiv >p{
+    width: 80%;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.submitButton {
+    font-family: 'Pokemon Solid', sans-serif;
+    width: 200px;
+    height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: #ff0;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px 0;
+}
