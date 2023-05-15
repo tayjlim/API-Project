@@ -16,8 +16,8 @@ justify-content: center;
     justify-content: space-between;
     border-bottom: solid 5px;
     margin-bottom: 0;
-    background-image: linear-gradient(to right,#f51111, #3b4CCa);
-    background-color: #f51111;
+    background-image: linear-gradient(to bottom,#f51111, #04148aed);
+
     margin:0px;
     padding:0px;
 }

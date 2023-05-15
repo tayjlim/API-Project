@@ -18,6 +18,9 @@
     border-style:groove;
     border-radius: 15px;
     padding:4px;
+    border-color: #3b4CCa;
+    background-image: linear-gradient(to bottom,#3b4CCa, #f0707017);
+
 }
 .spotContainer>p{
     margin-top:5px;
@@ -120,5 +123,5 @@ margin-bottom: 3px;
 
 .reviewsDivDetailBottom{
     width:80%
-    
+
 }
