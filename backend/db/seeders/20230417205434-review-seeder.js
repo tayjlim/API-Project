@@ -18,13 +18,13 @@ module.exports = {
         {
         spotId: 2,
         userId: 4,
-        review: "Staying at the Elite Four HQ was saucy like a Charizard! The grandeur of the Indigo Plateau and the intense battles against the elite trainers left me in awe. The rooms were well-appointed, and the staff was knowledgeable and helpful. I enjoyed the challenge of battling the strong trainers and the breathtaking views from the HQ. It's a must-visit destination for any Pokemon Trainer looking to test their skills and be inspired by the best in the Kanto region!",
+        review: "he grandeur of the Indigo Plateau and the intense battles against the elite trainers left me in awe. The rooms were well-appointed, and the staff was knowledgeable and helpful. I enjoyed the challenge of battling the strong trainers and the breathtaking views from the HQ. It's a must-visit destination for any Pokemon Trainer looking to test their skills and be inspired by the best in the Kanto region!",
         stars: 4,
         },
         {
         spotId: 3,
         userId: 4,
-        review: "My stay at the Burned Tower View in Ecruteak City was absolutely swaggy Pikachu! The luxury apartment provided stunning panoramic views of the historic Burned Tower, and the attention to detail in the decor was impressive. Ecruteak City itself is a charming location with a rich cultural heritage. I enjoyed exploring the city's beautiful architecture, visiting the local Pokemon Gym, and experiencing the warm hospitality of the Johto region. It was a delightful retreat that exceeded my expectations!",
+        review: "My stay at the Burned Tower View in Ecruteak City was amazing! The luxury apartment provided stunning panoramic views of the historic Burned Tower, and the attention to detail in the decor was impressive. Ecruteak City itself is a charming location with a rich cultural heritage. I enjoyed exploring the city's beautiful architecture, visiting the local Pokemon Gym, and experiencing the warm hospitality of the Johto region. It was a delightful retreat that exceeded my expectations!",
         stars: 5,
         },
         {

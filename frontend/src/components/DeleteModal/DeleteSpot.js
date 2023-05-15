@@ -34,7 +34,7 @@ function DeleteSpot ({spotId}) {
             </h1>
 
             <h3>
-            Are you Sure You Want To Remove?
+            Are you sure you want yo remove this spot from the listings?
             </h3>
 
 

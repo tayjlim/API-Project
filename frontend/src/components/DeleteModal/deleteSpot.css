@@ -26,3 +26,16 @@
     padding: 5px;
     margin: 10px 0;
 }
+.deleteFormforSpot{
+    width:500px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    border:solid;
+    border-color: black;
+    border-radius: 12px;
+}
+#modalContent{
+    border-radius: 12px;
+}

@@ -69,3 +69,17 @@ body{
   display:flex;
   justify-content: space-around;
 }
+
+form{
+  display:flex;
+  flex-direction: column;
+}
+.buttonDiv{
+   display : flex;
+   justify-content: space-evenly;
+}
+.updateButton, .deleteButton{
+  background-color: #f0707017;
+  border:none;
+  border-radius: 10px;
+}
