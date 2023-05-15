@@ -2,6 +2,7 @@ import {useModal} from '../../context/Modal'
 import { useDispatch } from 'react-redux';
 import { deleteSpot } from '../../store/spots';
 import { useEffect } from 'react';
+import './deleteSpot.css'
 
 function DeleteSpot ({spotId}) {
 
@@ -33,18 +34,18 @@ function DeleteSpot ({spotId}) {
             </h1>
 
             <h3>
-            Are you Sure You Want To Remove?
+            Are you sure you want yo remove this spot from the listings?
             </h3>
 
 
-                <button className = 'yesButton' onClick={yesDelete}>
-                YES (REMOVE)
+                <button className = 'yesButtonDeleteSpot' onClick={yesDelete}>
+                YES (Delete Spot)
                 </button>
 
-                <button className = 'noButton' onClick={no}>
-                    NO (DONT REMOVE)
+                <button className = 'noButtonDeleteSpot' onClick={no}>
+                    NO (Keep Spot)
                 </button>
-           
+
 
         </div>
     )

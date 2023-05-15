@@ -1,5 +1,6 @@
 import OpenModalButton from '../OpenModalButton'
 import DeleteReview from '../DeleteReview'
+import './reviews.css'
 const ReviewsForSpot = ({review,user}) =>{
     const months = {
         '01': 'January',
@@ -19,7 +20,10 @@ const ReviewsForSpot = ({review,user}) =>{
     if(!review.id)return null
 
     console.log(review)
-    const date = review.createdAt.split('-')[1]
+    const dateArr = review.createdAt.split('-')
+    const date = dateArr[1]
+    const year = dateArr[0]
+    console.log(review)
     // console.log(' review user; ' ,spotId)
     // console.log('review in side review model',review.id)
 
@@ -41,7 +45,7 @@ const ReviewsForSpot = ({review,user}) =>{
             <h3 className='reviewFirstName'>
            {
              review.User.firstName
-            }
+            }, {review.User.lastName}
              </h3>
 
 
@@ -50,7 +54,7 @@ const ReviewsForSpot = ({review,user}) =>{
             <h3 className = 'month'>
             {
                 months[date]
-            }
+            }, {year}
             </h3>
 
                 {

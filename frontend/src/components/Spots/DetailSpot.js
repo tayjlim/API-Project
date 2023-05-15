@@ -23,7 +23,7 @@ const {closeModal} = useModal();
 const reviewsObj = useSelector((state)=> (state.reviews.spot))
 const spot = useSelector((state) => (state.spots.single))
 const user = useSelector((state) => state.session.user)
-const reviews = Object.values(reviewsObj)
+const reviews = Object.values(reviewsObj).reverse()
 
 useEffect(()=>{
     dispatch(getSpot(spotId))
@@ -66,7 +66,7 @@ return(
 <div className = 'detailSpotdiv'>
 
         <div className ='topHeaders'>
-            <h1>{spot.name}</h1>
+            <h2>{spot.name}</h2>
             <h2>{spot.city}, {spot.state}, {spot.country}</h2>
         </div>
 
@@ -167,15 +167,16 @@ return(
             <div className = 'reviewLoopdiv'>
             {reviews.map(review=><ReviewsForSpot review={review} user = {user}/>)}
             </div>
-        ) :
+        ) : (!user ? null : (user.id !== spot.Owner.id) ?
 
-        (
-
-            <div>
+        (<div>
         <h2>Be the First to Review!</h2>
-            </div>
+        </div>) : null)
 
-        )}
+        }
+
+
+
         </div>
 
 

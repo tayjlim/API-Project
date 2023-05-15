@@ -11,18 +11,18 @@
 
 .writeReviewButton{
     font-family: 'Pokemon Solid', sans-serif;
-    width: 200px;
-    height: 2.5em;
+    width: 160px;
+    height: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: red;
-    color: #ff0;
+    color:rgba(251 200 60);
     border: none;
     border-radius: 10px;
     padding: 5px;
     margin: 10px 0;
-    font-size: 20px;
+    font-size: 17px;
 
 }
 
@@ -37,6 +37,7 @@
 .starNumreviews{
     font-size:15px;
     font-weight: bold;
+
 }
 .priceP{
     font-size:15px;
@@ -51,6 +52,7 @@
 }
 .reviewDescription{
     margin: 9px;
+    width:50%;
 }
 
 .reserveNowButton{
@@ -62,10 +64,15 @@
     justify-content: center;
     align-items: center;
     background-color: red;
-    color: #ff0;
+    color:rgba(251 200 60);
     border: none;
     border-radius: 10px;
     padding: 5px;
     margin: 10px 0;
     font-size: 20px;
+}
+
+.detailImageDiv{
+   border:solid;
+    border-radius:15px;
 }

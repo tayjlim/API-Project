@@ -48,22 +48,23 @@ function ProfileButton({ user }) {
       <div className = 'createDiv'>
           {user ? (
           <Link to ='/spots/new'>
-            <h1 className = 'Link'>
+            <h1 className = 'Link' id = 'createspotId'>
             Create a New Spot
             </h1>
           </Link>
 
           ):null}
         </div>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+
+
+        <i className="fas fa-user-circle" onClick={openMenu}/>
+
 
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.firstName} {user.lastName}</li>
+
+            <li>Hello, {user.firstName}, {user.lastName}!</li>
             <li>{user.email}</li>
             <li>
               <button className = 'logOutButton' onClick={logout} >Log Out</button>
