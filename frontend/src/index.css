@@ -1,6 +1,10 @@
 /* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap');
 body,textarea,input {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 900;
+
+
 
 }
 
@@ -28,10 +32,10 @@ body{
 .twoButtonsDiv{
   display:flex;
 }
-.yesDeleteReview,.noDonotDelete{
+.yesDeleteReview{
   font-family: 'Pokemon Solid', sans-serif;
-  width: 20%;
-  height: 1.5em;
+  width: 200px;
+  height: 2.5em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,8 +45,25 @@ body{
   border-radius: 10px;
   padding: 5px;
   margin: 10px 0;
-  font-size: 20px;
 }
+
+.noDonotDelete{
+  font-family: 'Pokemon Solid', sans-serif;
+  width: 200px;
+  height: 2.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(221, 218, 218);
+  color: #ff0;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px 0;
+
+}
+
+
 
 .yesNobuttonDiv{
   display:flex;

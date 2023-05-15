@@ -9,12 +9,14 @@ justify-content: center;
 }
 
 #navigation{
+    height:100px;
     width:100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: solid;
+    border-bottom: solid 5px;
     margin-bottom: 0;
+    background-image: linear-gradient(to right,#f51111, #3b4CCa);
     background-color: #f51111;
     margin:0px;
     padding:0px;
@@ -29,6 +31,8 @@ li{
     display:flex;
     width: 300px;
     justify-content: space-around;
+    align-items: center;
+    margin-right: 1%;
 }
 .fas{
     margin-bottom: 20px;
@@ -42,9 +46,10 @@ ul {
   }
 .Link{
     margin:0px;
-    color:#ff0;
+    color:rgba(251 200 60);
     text-decoration:none;
-    font-size: 25px;
+    font-size: 45px;
+    white-space: nowrap;
 }
 .active,a{
     text-decoration:none
@@ -55,4 +60,27 @@ ul {
 .createDiv{
     display:flex;
     align-items: center;
+}
+.buttonUserCircle{
+    background-color: #f51111;
+}
+
+.fa-user-circle{
+    background-color: white;
+}
+#createspotId{
+    font-size: 30px;
+}
+
+.pokepicdiv{
+    max-width: 10%;
+    max-height: 10%;
+}
+
+.profile-dropdown{
+    position: absolute;
+   top:100px;
+    width: 200px;
+    height: 100px;
+
 }
