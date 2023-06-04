@@ -14,7 +14,7 @@ const SpotItem = ({spot,current}) => {
     else
     return(
      <div id = {spot.id} className = 'spotContainer'>
-       <img onClick ={handleClick}className = 'spotImage'src = {spot.previewImage} alt = {spot.name} title ={spot.name}/>
+       <img onClick ={handleClick} className = 'spotImage'src = {spot.previewImage} alt = {spot.name} title ={spot.name}/>
 
        <div className = 'citystatestars'>
           <p>{spot.city} , {spot.state}</p>

@@ -56,9 +56,7 @@ const bookingClick = () =>{
 // console.log('DOES THIS SPOT WORK?>' , spot)
 // console.log('DOES THIS reviews WORK?>' , reviews)
 // console.log('DOES THIS reviews USER?>', user)
-// console.log('DOES THIS WORK' ,canwriteReview(user,reviews))
-
-// console.log('have user show ',user)
+)
 
 if(!spot.SpotImages) return null
 
