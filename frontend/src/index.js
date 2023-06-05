@@ -11,7 +11,7 @@ import App from "./App";
 import configureStore from "./store";
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from "./store/session";
-
+console.log('swag ')
 const store = configureStore();
 console.log('wakanda')
 if (process.env.NODE_ENV !== "production") {
