@@ -20,7 +20,7 @@ const DeleteReview = ({review}) =>{
 
         }
     }
-    console.log('')
+    
 
 
  return (<div className = 'deleteForm'>
