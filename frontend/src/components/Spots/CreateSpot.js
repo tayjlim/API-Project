@@ -111,7 +111,7 @@ function CreateSpot  (){
 
         if(img4.url){
             let split = img4.url.split('.')
-            !validFiles.includes(split[split.length-1]) ? er.img4 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img4)
+            !validFiles.includes(split[split.length-1]) ? er.img4 = 'Image URL must end in .png. .jpg, or .jpeg' : validImages.push(img1)
         }
 
         //error setter

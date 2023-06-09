@@ -14,7 +14,7 @@ const ReviewModal = ({user,spotId}) =>{
     const { closeModal } = useModal()
     console.log('user is this ', user)
 
-let starArr = [1,2,3,4,5]
+let starArr = [1,2,3,4,5,6]
 
 
 useEffect(()=>{

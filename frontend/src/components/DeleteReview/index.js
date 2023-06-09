@@ -20,7 +20,7 @@ const DeleteReview = ({review}) =>{
 
         }
     }
-
+    
 
 
  return (<div className = 'deleteForm'>
