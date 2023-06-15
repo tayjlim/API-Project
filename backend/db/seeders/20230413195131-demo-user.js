@@ -11,20 +11,33 @@ module.exports = {
     options.tableName = 'Users';
     return queryInterface.bulkInsert(options, [
       {
-        email: 'demo@user.io',
+        email: 'demo@poke.io',
+        firstName: 'Ashe',
+        lastName: 'Test Em',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password')
-      },
-      {
-        email: 'user1@user.io',
-        username: 'FakeUser1',
-        hashedPassword: bcrypt.hashSync('password2')
-      },
-      {
-        email: 'user2@user.io',
-        username: 'FakeUser2',
-        hashedPassword: bcrypt.hashSync('password3')
-      }
+        },
+          {
+          email: 'bulbasaurivy@poke.io',
+          firstName: 'Ivy',
+          lastName: 'Bulbasaur',
+          username: 'GrassGuru',
+          hashedPassword: bcrypt.hashSync('leafy456')
+          },
+          {
+          email: 'charmanderblaze@poke.io',
+          firstName: 'Blaze',
+          lastName: 'Charmander',
+          username: 'FireFury',
+          hashedPassword: bcrypt.hashSync('flame789')
+          },
+          {
+          email: 'squirtlesplash@poke.io',
+          firstName: 'Splash',
+          lastName: 'Squirtle',
+          username: 'AquaAce',
+          hashedPassword: bcrypt.hashSync('aquatic987')
+          }
     ], {});
   },
 

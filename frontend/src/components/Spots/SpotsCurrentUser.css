@@ -1,0 +1,14 @@
+
+
+#createSpotCurrent{height: 2.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 10px 0;
+}
