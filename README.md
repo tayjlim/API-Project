@@ -20,7 +20,16 @@ This is a web application inspired by airbnb
 * CRUD for Reviews
 * Crud for Bookings
 * and More!
-
+  
+## Getting started:
+* Copy the ".env-copy" file and enter a db file
+* cd into /backend
+* npm install
+* npm start to run the backend
+* cd into /frontend
+* npm install
+* npm start to run the frontend
+  
 ## Frontend Supports: 
 * Authentication
 * Crud for Spots
