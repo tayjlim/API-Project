@@ -8,6 +8,7 @@ import OpenModalButton from '../OpenModalButton'
 import ReviewModal from "../ReviewModal/ReviewModal";
 import { useModal } from "../../context/Modal";
 import './DetailSpot.css'
+
 const DetailSpot = () =>
 {
 
@@ -56,7 +57,7 @@ const bookingClick = () =>{
 // console.log('DOES THIS SPOT WORK?>' , spot)
 // console.log('DOES THIS reviews WORK?>' , reviews)
 // console.log('DOES THIS reviews USER?>', user)
-)
+
 
 if(!spot.SpotImages) return null
 
@@ -190,6 +191,3 @@ return(
 }
 
 export default DetailSpot;
-        <div>
-                <h2>Be the First to Review!</h2>
-         </div>
