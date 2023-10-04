@@ -1,0 +1,49 @@
+.footerDiv{
+    height:200px;
+    display:flex;
+    background-color: #242424;
+    color:white;
+
+}
+.linkedinLogo,
+.githubLogo {
+    width: 28px;
+    margin: 5px;
+    padding-top:3px;
+}
+.tech-icons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.footerNameTag{
+    font-size: 19px;
+}
+.tech-icons {
+    width: 30px;
+    height: 30px;
+  }
+
+.footer-contributors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+.footer-container {
+    text-align: center;
+    background-color: #23252b;
+    width: 100vw;
+    margin-bottom: -6px;
+    margin-left: -5px;
+    height: 95px;
+    bottom: 0;
+    position: absolute;
+    padding-bottom: 8px;
+}
+.footerNameBlock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

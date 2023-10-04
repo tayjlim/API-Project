@@ -59,7 +59,20 @@ module.exports = {
       name: 'Cave of Origin Retreat',
       description: 'Escape to the tranquil Sootopolis City and indulge in a spacious villa with direct access to the mystical Cave of Origin. Discover the wonders of the Hoenn region and its captivating Pokemon.',
       price: 2000.00
+      },
+      {
+        ownerId: 1,
+        address: '123 Pallet Town',
+        city: 'Pallet',
+        state: 'Kanto',
+        country: 'Kanto Region',
+        lat: 45.67,
+        lng: 123.45,
+        name: 'Pikachu Paradise Cottage',
+        description: "Experience the magic of Pallet Town and stay at the Pikachu Paradise Cottage. This cozy retreat offers a front-row seat to Professor Oak's Pokemon research lab and the lush Viridian Forest.",
+        price: 1500.00
       }
+
    ],{})
   },
 
