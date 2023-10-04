@@ -55,9 +55,9 @@ function ProfileButton({ user }) {
 
           ):null}
         </div>
-
-
-        <i className="fas fa-user-circle" onClick={openMenu}/>
+            <div className = 'profileDiv'>
+            <img className = 'profilePic' src = 'https://cdn.discordapp.com/attachments/1113213089702228038/1159261707865174056/pokeball.png?ex=65306199&is=651dec99&hm=8b64736934b6bd82a55256da6359a50b53ba344e78254bbf83f7916c87e57a64&' onClick={openMenu}></img>
+            </div>
 
 
       <ul className={ulClassName} ref={ulRef}>

@@ -11,6 +11,8 @@ import CreateSpot from './components/Spots/CreateSpot.js'
 import SpotsCurrentUser from "./components/Spots/SpotsCurrentUser";
 import EditSpot from "./components/Spots/EditSpot";
 
+import Footer from "./components/Footer";
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <>
+    <div id = 'content-wrap'>
       <Navigation isLoaded={isLoaded} />
       {
         isLoaded &&
@@ -54,7 +57,8 @@ function App() {
 
         </Switch>
       }
-
+      </div>
+      <Footer/>
     </>
   );
 }
